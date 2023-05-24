@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Account, Client, ID } from "appwrite";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const FormVibeContext = createContext(null);
 
@@ -33,11 +34,20 @@ export default function FormvibeContextProvider({ children }) {
           password
         );
 
+        toast("Logged in successfully", {
+          position: "top-right",
+          autoClose: 4000,
+          theme: "light",
+        });
+
         router.push("/accounts/forms");
       }
     } catch (err) {
-      // toast
-      alert(err);
+      toast(err?.message, {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -53,7 +63,11 @@ export default function FormvibeContextProvider({ children }) {
         );
       }
     } catch (err) {
-      alert(err);
+      toast(err?.message ?? "Network Error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
     }
   };
 
@@ -61,9 +75,18 @@ export default function FormvibeContextProvider({ children }) {
     try {
       if (appwriteAccount) {
         const response = await appwriteAccount.deleteSession("current");
+        toast("Logged out successfully", {
+          position: "top-right",
+          autoClose: 4000,
+          theme: "light",
+        });
       }
     } catch (err) {
-      alert(err);
+      toast(err?.message ?? "Network Error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
     }
   };
 
@@ -77,10 +100,20 @@ export default function FormvibeContextProvider({ children }) {
           password,
           name
         );
+
+        toast("User account created successfully", {
+          position: "top-right",
+          autoClose: 4000,
+          theme: "light",
+        });
         router.push("/login");
       }
     } catch (err) {
-      alert(err);
+      toast(err?.message ?? "Network Error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
     } finally {
       setIsLoading(false);
     }

@@ -1,15 +1,22 @@
+"use client";
+
 import "./globals.css";
 import { Manrope } from "next/font/google";
 import FormVibeContextProvider from "@/contexts/FormVibeContextProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const manrope = Manrope({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <FormVibeContextProvider>
-        <body className={manrope.className + " text-gray-800"}>{children}</body>
-      </FormVibeContextProvider>
+      <body className={manrope.className + " text-gray-800 text-sm"}>
+        <FormVibeContextProvider>
+          <main>{children}</main>
+          <ToastContainer />
+        </FormVibeContextProvider>
+      </body>
     </html>
   );
 }
