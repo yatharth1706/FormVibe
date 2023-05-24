@@ -3,15 +3,18 @@
 import React from "react";
 import { Formik, useFormik } from "formik";
 import Link from "next/link";
+import { useFormVibeContext } from "@/contexts/FormVibeContextProvider";
 
 function Login() {
+  const { loginWithGithub, login, isLoading } = useFormVibeContext();
+
   const formInitialValues = {
     email: "",
     password: "",
   };
 
-  const formSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
+  const formSubmit = async (values) => {
+    await login(values.email, values.password);
   };
 
   return (
@@ -45,13 +48,18 @@ function Login() {
               className="border-zinc-300 border px-4 py-2 outline-sky-300 rounded-md"
               {...formik.getFieldProps("password")}
             />
-            <button type="submit" className="btn-primary mt-4">
-              Log in
+            <button
+              type="submit"
+              className="btn-primary mt-4"
+              disabled={isLoading}
+            >
+              {isLoading ? "Logging in" : "Login"}
             </button>
             <p className="font-light text-center">Or</p>
             <button
-              type="submit"
+              type="button"
               className="flex items-center gap-2 justify-center btn-secondary"
+              onClick={loginWithGithub}
             >
               <img
                 className="w-4"

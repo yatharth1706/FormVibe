@@ -30,7 +30,7 @@ export default function Home() {
           className="w-3/5 absolute -z-10 -right-5 -top-2"
         />
         <img
-          class="w-2/3 absolute -right-28 object-cover rounded-md border border-zinc-200 "
+          className="w-2/3 absolute -right-28 object-cover rounded-md border border-zinc-200 "
           src="/assets/Intro.png"
           alt="Intro Pic"
         />

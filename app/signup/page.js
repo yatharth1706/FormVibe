@@ -2,10 +2,12 @@
 
 import React from "react";
 import { Formik, useFormik } from "formik";
-import {} from "lucide";
 import Link from "next/link";
+import { useFormVibeContext } from "@/contexts/FormVibeContextProvider";
 
 function Signup() {
+  const { signup, loginWithGithub, isLoading } = useFormVibeContext();
+
   const formInitialValues = {
     name: "",
     email: "",
@@ -13,7 +15,8 @@ function Signup() {
   };
 
   const formSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
+    const { email, password, name } = values;
+    signup(name, email, password);
   };
 
   return (
@@ -60,8 +63,9 @@ function Signup() {
             </button>
             <p className="font-light text-center">Or</p>
             <button
-              type="submit"
+              type="button"
               className="flex items-center gap-2 justify-center btn-secondary"
+              onClick={loginWithGithub}
             >
               <img
                 className="w-4"
