@@ -26,7 +26,7 @@ export default function Home() {
           </Link>
         </div>
         <img
-          src="/assets/CircleMembers.png"
+          src="/assets/Circles.png"
           alt="Circle Members"
           className="w-3/5 absolute -z-10 -right-5 -top-2"
         />

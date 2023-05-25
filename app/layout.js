@@ -11,7 +11,9 @@ const manrope = Manrope({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={manrope.className + " text-gray-800 text-sm"}>
+      <body
+        className={manrope.className + " text-gray-800 text-sm bg-[#ecf2f561]"}
+      >
         <FormVibeContextProvider>
           <main>{children}</main>
           <ToastContainer />
