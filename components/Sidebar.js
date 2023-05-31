@@ -7,7 +7,7 @@ function NavLink({ iconImg, linkName, classDesc, isActive }) {
     <div
       className={
         "p-[10px] flex gap-3 items-center hover:shadow-xl cursor-pointer hover:bg-white hover:border hover:border-zinc-200 rounded " +
-        (isActive ? "border border-zinc-200 font-semibold bg-white" : "")
+        (isActive ? "bg-gray-200 shadow-lg font-semibold" : "")
       }
     >
       <div className="w-8">
@@ -30,34 +30,34 @@ function Sidebar() {
       <NavLink
         iconImg="formIcon.svg"
         linkName="My Forms"
-        isActive={path.includes("/accounts/forms")}
+        isActive={path.includes("/app")}
       />
       <NavLink
         iconImg="templatesIcon.svg"
         linkName="Templates"
-        isActive={path.includes("/accounts/templates")}
+        isActive={path.includes("/templates")}
       />
       <NavLink
         iconImg="membersIcon.svg"
         linkName="Members"
-        isActive={path.includes("/accounts/members")}
+        isActive={path.includes("/members")}
       />
       <NavLink
         iconImg="integrationIcon.svg"
         linkName="Integrations"
         classDesc="w-7"
-        isActive={path.includes("/accounts/integrations")}
+        isActive={path.includes("/integrations")}
       />
       <NavLink
         iconImg="accountsIcon.svg"
         linkName="Account"
         classDesc="w-6"
-        isActive={path.includes("/accounts/myaccount")}
+        isActive={path.includes("/myaccount")}
       />
       <NavLink
         iconImg="helpIcon.svg"
         linkName="Help"
-        isActive={path.includes("/accounts/help")}
+        isActive={path.includes("/help")}
       />
     </div>
   );

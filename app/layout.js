@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={manrope.className + " text-gray-800 text-sm bg-[#ecf2f561]"}
+        className={manrope.className + " text-gray-800 text-sm bg-[#fdfdfd]"}
       >
         <FormVibeContextProvider>
           <main>{children}</main>
