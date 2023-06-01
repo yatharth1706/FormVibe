@@ -3,6 +3,7 @@
 import { useFormVibeContext } from "@/contexts/FormVibeContextProvider";
 import { renderFormElement } from "@/lib/helpers";
 import moment from "moment";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
@@ -13,6 +14,7 @@ function BuilderPage({ params }) {
   const [formName, setFormName] = useState("");
   const [formDescription, setFormDescription] = useState("");
   const [formId, setFormId] = useState();
+  const [formSlug, setFormSlug] = useState();
   const router = useRouter();
   const [timer, setTimer] = useState();
   const [initialRender, setInitialRender] = useState(true);
@@ -38,7 +40,7 @@ function BuilderPage({ params }) {
     }
   }, [formName, formDescription, formElements, formId, initialRender]);
 
-  const updateFormMetaData = async () => {
+  const updateFormMetaData = async (btnType = "") => {
     const payload = {
       form_name: formName,
       form_description: formDescription,
@@ -46,6 +48,9 @@ function BuilderPage({ params }) {
       form_type: "Airtable",
     };
     await updateForm(payload, formId);
+    if (btnType === "save") {
+      toast("Form updated successfully.");
+    }
   };
 
   const fetchForm = async () => {
@@ -63,6 +68,7 @@ function BuilderPage({ params }) {
     let cols = JSON.parse(doc?.form_columns);
     setFormElements(cols);
     setFormId(doc?.$id);
+    setFormSlug(doc?.form_id);
   };
 
   const [{ canDrop, isOver }, drop] = useDrop({
@@ -76,6 +82,7 @@ function BuilderPage({ params }) {
       };
 
       setFormElements([...formElements, { ...newFormElement }]);
+      setInitialRender(false);
     },
     collect: (monitor) => ({
       canDrop: monitor.canDrop(),
@@ -84,6 +91,15 @@ function BuilderPage({ params }) {
   });
 
   const isActive = canDrop && isOver;
+
+  const handleDeleteFormElement = (index) => {
+    let existingFormEls = [...formElements];
+    console.log(existingFormEls, index);
+    existingFormEls.splice(index, 1);
+
+    setFormElements([...existingFormEls]);
+    setInitialRender(false);
+  };
 
   const handleFormElementLabelChange = (index, event) => {
     const { value } = event.target;
@@ -113,7 +129,7 @@ function BuilderPage({ params }) {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full w-full">
       <div className="flex gap-2 items-center px-9 py-7 h-8 w-full border-b border-zinc-300">
         <img
           src="/assets/icons/backIcon.svg"
@@ -129,80 +145,84 @@ function BuilderPage({ params }) {
         </div>
         <div className="flex ml-auto gap-4 items-center">
           <span>Auto saved</span>
-          <button className="btn-secondary">Preview</button>
-          <button className="btn-primary">Save</button>
+          <Link href={"/" + formSlug} target="_blank">
+            <button className="btn-secondary">Preview</button>
+          </Link>
+          <button
+            className="btn-primary"
+            onClick={() => updateFormMetaData("save")}
+          >
+            Save
+          </button>
         </div>
       </div>
-      <div className="flex w-full h-screen">
-        <div className="w-9/12 border-r border-zinc-300 px-16 py-6 flex flex-col gap-4">
-          <div
-            className="flex justify-between w-full border border-zinc-200 rounded p-8 bg-white"
-            style={{
-              boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.28)",
-            }}
-          >
-            <div className="flex flex-col w-full gap-1 ">
-              <input
-                type="text"
-                value={formName}
-                placeholder="Enter form name here"
-                onChange={(e) => {
-                  setFormName(e.target.value);
-                  setInitialRender(false);
-                }}
-                className="outline-none py-2 font-semibold text-gray-600 text-lg"
-              />
-
-              <input
-                type="text"
-                value={formDescription}
-                placeholder="Enter some description for the form (optional)"
-                onChange={(e) => {
-                  setFormDescription(e.target.value);
-                  setInitialRender(false);
-                }}
-                className="text-gray-500 w-full outline-none py-2"
-              />
-            </div>
-            <div>
-              <img
-                src="/assets/icons/imageUploadIcon.svg"
-                alt="Upload Banner Image"
-              />
-              <input type="file" id="formIcon" className="hidden" />
-            </div>
-          </div>
+      <div className="flex w-full h-full">
+        <div className="w-9/12 border-r border-zinc-300 px-8 py-6 flex flex-col gap-4 h-full bg-white overflow-y-auto ">
           <div
             className={
-              "flex flex-col gap-8  items-center p-8 w-full rounded border border-[#E5E5E5] bg-white min-h-[500px] max-h-[600px] " +
-              (formElements?.length > 0 ? "justify-start" : "justify-center") +
-              (isActive
-                ? "border border-blue-400 shadow-xl shadow-blue-300"
-                : "")
+              "flex flex-col gap-8 p-8  items-center w-full rounded border bg-white h-4/5" +
+              (isActive ? " border border-blue-400 " : " ") +
+              (formElements?.length > 0 ? " justify-start" : " justify-center")
             }
-            style={{
-              boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.28)",
-            }}
             ref={drop}
           >
+            <div
+              className="flex justify-between w-full border border-zinc-200 rounded p-8 bg-white"
+              style={{
+                boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
+              }}
+            >
+              <div className="flex flex-col w-full gap-1 ">
+                <input
+                  type="text"
+                  value={formName}
+                  placeholder="Enter form name here"
+                  onChange={(e) => {
+                    setFormName(e.target.value);
+                    setInitialRender(false);
+                  }}
+                  className="outline-none py-2 font-semibold text-gray-600 text-lg"
+                />
+
+                <input
+                  type="text"
+                  value={formDescription}
+                  placeholder="Enter some description for the form (optional)"
+                  onChange={(e) => {
+                    setFormDescription(e.target.value);
+                    setInitialRender(false);
+                  }}
+                  className="text-gray-500 w-full outline-none py-2"
+                />
+              </div>
+              <div>
+                <img
+                  src="/assets/icons/imageUploadIcon.svg"
+                  alt="Upload Banner Image"
+                />
+                <input type="file" id="formIcon" className="hidden" />
+              </div>
+            </div>
             {formElements.map((el, index) =>
               renderFormElement(
                 el.name,
                 el.label,
                 (event) => handleFormElementLabelChange(index, event),
-                true
+                true,
+                () => handleDeleteFormElement(index)
               )
             )}
             {!formElements.length > 0 && (
-              <>
+              <div className="p-8 h-96 flex justify-center flex-col items-center">
                 <img
                   src="/assets/icons/dragDropIcon.svg"
                   alt="Drag and Drop Icon"
+                  className="w-12"
                 />
                 <span className="text-gray-600">
                   Drag elements from left sidebar
                 </span>
-              </>
+              </div>
             )}
           </div>
         </div>

@@ -9,9 +9,9 @@ export default function AccountsLayout({ children }) {
     <div className="flex flex-col w-full">
       <NavigationBar />
       <DndProvider backend={HTML5Backend}>
-        <div className="flex w-full">
+        <div className="flex w-full h-screen">
           <FormBuilderSidebar />
-          <div className="w-full">{children}</div>
+          <div className="w-full h-full">{children}</div>
         </div>
       </DndProvider>
     </div>

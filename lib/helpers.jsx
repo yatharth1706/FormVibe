@@ -1,8 +1,22 @@
-export function renderFormElement(name, label, onLabelChange, disabled) {
+import { Trash2, Trash2Icon } from "lucide-react";
+
+export function renderFormElement(
+  name,
+  label,
+  onLabelChange,
+  disabled,
+  handleDelete
+) {
   switch (name) {
     case "Text Field":
       return (
-        <div className="flex flex-col gap-2 w-full">
+        <div
+          className="flex flex-col gap-2 w-full rounded p-8  hover:shadow border border-zinc-200"
+          style={{
+            position: "relative",
+            boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
+          }}
+        >
           <input
             type="text"
             value={label}
@@ -16,11 +30,22 @@ export function renderFormElement(name, label, onLabelChange, disabled) {
             placeholder="Enter answer here "
             disabled={disabled}
           />
+          <Trash2Icon
+            className="w-4 absolute cursor-pointer"
+            style={{ right: 16 }}
+            onClick={handleDelete}
+          />
         </div>
       );
     case "File Upload":
       return (
-        <div className="flex flex-col gap-2 w-full">
+        <div
+          className="flex flex-col gap-2 w-full p-8 border border-zinc-200"
+          style={{
+            position: "relative",
+            boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
+          }}
+        >
           <input
             type="text"
             value={label}
@@ -36,11 +61,22 @@ export function renderFormElement(name, label, onLabelChange, disabled) {
               disabled={disabled}
             />
           </div>
+          <Trash2Icon
+            className="w-4 absolute cursor-pointer"
+            style={{ right: 16 }}
+            onClick={handleDelete}
+          />
         </div>
       );
     case "Date":
       return (
-        <div className="flex flex-col gap-2 w-full">
+        <div
+          className="flex flex-col gap-2 w-full p-8 border border-zinc-200"
+          style={{
+            position: "relative",
+            boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
+          }}
+        >
           <input
             placeholder="Enter label name here"
             type="text"
@@ -53,6 +89,11 @@ export function renderFormElement(name, label, onLabelChange, disabled) {
             className="border-b border-gray-400 bg-white cursor-pointer py-4 outline-none"
             placeholder="Enter answer here "
             disabled={disabled}
+          />
+          <Trash2Icon
+            className="w-4 absolute cursor-pointer"
+            style={{ right: 16 }}
+            onClick={handleDelete}
           />
         </div>
       );
