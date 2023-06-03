@@ -76,9 +76,10 @@ function BuilderPage({ params }) {
     drop: (item) => {
       // Handle the dropped form element here
       let newFormElement = {
-        label: "Label",
-        name: item.name,
         id: Date.now(),
+        name: item.name,
+        label: "Label",
+        value: "",
       };
 
       setFormElements([...formElements, { ...newFormElement }]);

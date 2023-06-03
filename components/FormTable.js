@@ -12,6 +12,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import moment from "moment";
 import { useRouter } from "next/navigation";
+import FormsAction from "./FormsAction";
 
 function FormTable({ forms }) {
   const router = useRouter();
@@ -31,18 +32,20 @@ function FormTable({ forms }) {
           </TableHeader>
           <TableBody>
             {forms.map((form) => (
-              <TableRow
-                className="cursor-pointer"
-                onClick={() => router.push("/forms/" + form?.form_id)}
-              >
-                <TableCell>{form?.form_name ?? "-"}</TableCell>
+              <TableRow>
+                <TableCell
+                  className="cursor-pointer"
+                  onClick={() => router.push("/forms/" + form?.form_id)}
+                >
+                  {form?.form_name ?? "-"}
+                </TableCell>
                 <TableCell>{form?.form_type ?? "-"}</TableCell>
                 <TableCell>{form?.form_description ?? "-"}</TableCell>
                 <TableCell>
                   {moment(form?.created_on).format("YYYY-MM-DD HH:mm")}
                 </TableCell>
                 <TableCell className="text-right">
-                  <MoreHorizontal className="cursor-pointer inline-block" />
+                  <FormsAction formSlug={form?.form_id} />
                 </TableCell>
               </TableRow>
             ))}

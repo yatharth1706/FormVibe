@@ -193,6 +193,44 @@ export default function FormvibeContextProvider({ children }) {
     }
   };
 
+  const retrieveResponses = async (slug) => {
+    try {
+      const res = await databases.listDocuments(
+        process.env.DATABASE_ID,
+        process.env.RESPONSE_COLLECTION_ID,
+        [Query.equal("form_slug", slug)]
+      );
+
+      return res;
+    } catch (err) {
+      toast(err?.message ?? "Network error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    }
+  };
+
+  const submitResponse = async (formSlug, formElements) => {
+    try {
+      const res = await databases.createDocument(
+        process.env.DATABASE_ID,
+        process.env.RESPONSE_COLLECTION_ID,
+        ID.unique(),
+        {
+          form_slug: formSlug,
+          form_elements: JSON.stringify(formElements),
+        }
+      );
+    } catch (err) {
+      toast(err?.message ?? "Network error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    }
+  };
+
   const exposedValues = {
     login,
     loginWithGithub,
@@ -203,6 +241,8 @@ export default function FormvibeContextProvider({ children }) {
     updateForm,
     retrieveForms,
     retrieveFormBySlug,
+    retrieveResponses,
+    submitResponse,
   };
 
   return (

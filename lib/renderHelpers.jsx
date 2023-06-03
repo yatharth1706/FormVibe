@@ -1,6 +1,6 @@
 import { Trash2, Trash2Icon } from "lucide-react";
 
-export function renderFinalFormElements(name, label) {
+export function renderFinalFormElements(name, label, value, handleValueChange) {
   switch (name) {
     case "Text Field":
       return (
@@ -17,6 +17,8 @@ export function renderFinalFormElements(name, label) {
             type="text"
             className="border-b border-gray-400 py-4 outline-none bg-white "
             placeholder="Enter answer here "
+            value={value}
+            onChange={handleValueChange}
           />
         </div>
       );
@@ -36,6 +38,8 @@ export function renderFinalFormElements(name, label) {
               type="file"
               className="border-b border-gray-400 bg-white  py-4 outline-none"
               placeholder="Enter answer here "
+              value={value}
+              onChange={handleValueChange}
             />
           </div>
         </div>
@@ -55,6 +59,8 @@ export function renderFinalFormElements(name, label) {
             type="date"
             className="border-b border-gray-400 bg-white  py-4 outline-none"
             placeholder="Enter answer here "
+            value={value}
+            onChange={handleValueChange}
           />
         </div>
       );

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useFormVibeContext } from "@/contexts/FormVibeContextProvider";
 import { renderFinalFormElements } from "@/lib/renderHelpers";
+import { toast } from "react-toastify";
 
 function FormPage({ params }) {
   const [formElements, setFormElements] = useState([]);
@@ -9,7 +10,7 @@ function FormPage({ params }) {
   const [formDescription, setFormDescription] = useState("");
   const [formId, setFormId] = useState();
 
-  const { retrieveFormBySlug } = useFormVibeContext();
+  const { retrieveFormBySlug, submitResponse } = useFormVibeContext();
 
   useEffect(() => {
     fetchForm();
@@ -28,8 +29,26 @@ function FormPage({ params }) {
     setFormName(doc?.form_name ?? "");
     setFormDescription(doc?.form_description ?? "");
     let cols = JSON.parse(doc?.form_columns);
+    console.log(cols);
     setFormElements(cols);
     setFormId(doc?.$id);
+  };
+
+  const handleFormElementValueChange = (index, event) => {
+    const { value } = event.target;
+    setFormElements((prevFormElements) => {
+      const updatedFormElements = [...prevFormElements];
+      updatedFormElements[index] = {
+        ...updatedFormElements[index],
+        value: value,
+      };
+      return updatedFormElements;
+    });
+  };
+
+  const handleSubmit = async () => {
+    const res = await submitResponse(params?.id, formElements);
+    toast("Response submitted successfully");
   };
 
   return (
@@ -67,10 +86,14 @@ function FormPage({ params }) {
         </div>
       </div>
       {formElements.map((el, index) =>
-        renderFinalFormElements(el?.name, el?.label)
+        renderFinalFormElements(el?.name, el?.label, el?.value, (event) =>
+          handleFormElementValueChange(index, event)
+        )
       )}
       <div className="flex justify-center">
-        <button className="btn-primary w-40 p-3">Submit</button>
+        <button className="btn-primary w-40 p-3" onClick={handleSubmit}>
+          Submit
+        </button>
       </div>
     </div>
   );
