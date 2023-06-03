@@ -26,8 +26,14 @@ function MyForms() {
 
   const fetchForms = async () => {
     try {
+      let user =
+        (typeof window !== undefined &&
+          window.localStorage.getItem("FormVibeUser")) ??
+        "{}";
+      let userInfo = JSON.parse(user);
+
       setIsLoading(true);
-      const result = await retrieveForms("Yash");
+      const result = await retrieveForms(userInfo?.$id);
       console.log(result);
       setForms(result?.documents);
     } catch (err) {
@@ -38,7 +44,13 @@ function MyForms() {
   };
 
   const handleCreateForm = async () => {
-    const res = await createForm("Yash");
+    let user =
+      (typeof window !== undefined &&
+        window.localStorage.getItem("FormVibeUser")) ??
+      "{}";
+    let userInfo = JSON.parse(user);
+
+    const res = await createForm(userInfo?.$id);
     console.log(res);
     router.push("/forms/" + res?.form_id);
   };

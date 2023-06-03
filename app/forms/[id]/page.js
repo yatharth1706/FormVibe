@@ -115,20 +115,6 @@ function BuilderPage({ params }) {
     setInitialRender(false);
   };
 
-  const handlePublish = () => {
-    console.log({
-      formId: generateRandomFormId(),
-      formName: formName,
-      formDescription: formDescription,
-      formBanner: "",
-      formIcon: "",
-      formElements: [...formElements],
-      formType: "Airtable",
-      createdBy: "Yash",
-      createdOn: moment().format("YYYY-MM-DD HH:mm:ss"),
-    });
-  };
-
   return (
     <div className="flex flex-col h-full w-full">
       <div className="flex gap-2 items-center px-9 py-7 h-8 w-full border-b border-zinc-300">

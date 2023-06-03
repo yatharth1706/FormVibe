@@ -42,7 +42,6 @@ function FormElementsContainer() {
         <FormElement elementName="Yes / No" fileName="decisionIcon.svg" />
         <FormElement elementName="Poll" fileName="pollIcon.svg" />
         <FormElement elementName="Opinion" fileName="opinionIcon.svg" />
-        <FormElement elementName="Heading" fileName="headingIcon.svg" />
       </div>
     </div>
   );
