@@ -19,6 +19,10 @@ export default function FormvibeContextProvider({ children }) {
   const account = new Account(client);
   const databases = new Databases(client);
 
+  useEffect(() => {
+    getLoggedInUser();
+  }, []);
+
   const login = async (email, password) => {
     try {
       setIsLoading(true);
@@ -68,6 +72,9 @@ export default function FormvibeContextProvider({ children }) {
         theme: "light",
       });
       router.push("/login");
+      if (typeof window !== undefined) {
+        window.localStorage.clear();
+      }
     } catch (err) {
       toast(err?.message ?? "Network Error", {
         position: "top-right",
@@ -94,6 +101,25 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const getLoggedInUser = async () => {
+    try {
+      setIsLoading(true);
+      const result = await account.get();
+      console.log(result);
+      setIsLoading(false);
+      if (typeof window !== undefined) {
+        window.localStorage.setItem("FormVibeUser", JSON.stringify(result));
+      }
+    } catch (err) {
+      if (typeof window !== undefined) {
+        window.localStorage.setItem("FormVibeUser", "");
+      }
+      router.push("/login");
     } finally {
       setIsLoading(false);
     }
@@ -243,6 +269,7 @@ export default function FormvibeContextProvider({ children }) {
     retrieveFormBySlug,
     retrieveResponses,
     submitResponse,
+    getLoggedInUser,
   };
 
   return (

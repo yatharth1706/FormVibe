@@ -158,10 +158,10 @@ function BuilderPage({ params }) {
         </div>
       </div>
       <div className="flex w-full h-full">
-        <div className="w-9/12 border-r border-zinc-300 px-8 py-6 flex flex-col gap-4 h-full bg-white overflow-y-auto ">
+        <div className="w-9/12 border-r border-zinc-300 px-8 py-6 flex flex-col gap-4 bg-white overflow-y-auto ">
           <div
             className={
-              "flex flex-col gap-8 p-8  items-center w-full rounded border bg-white h-4/5" +
+              "flex flex-col gap-8 p-8  items-center w-full rounded border bg-white h-[640px] overflow-auto" +
               (isActive ? " border border-blue-400 " : " ") +
               (formElements?.length > 0 ? " justify-start" : " justify-center")
             }

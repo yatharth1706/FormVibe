@@ -16,7 +16,7 @@ function Responses({ params }) {
     const response = await retrieveResponses(formSlug);
 
     console.log(response);
-    setResponses(response?.documents);
+    setResponses(response?.documents ?? []);
   };
 
   return (
