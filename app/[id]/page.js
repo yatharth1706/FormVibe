@@ -34,13 +34,27 @@ function FormPage({ params }) {
     setFormId(doc?.$id);
   };
 
-  const handleFormElementValueChange = (index, event) => {
-    const { value } = event.target;
+  const handleYesNo = (index, val) => {
+    setFormElements((prevFormElements) => {
+      const updatedFormElements = [...prevFormElements];
+      updatedFormElements[index]["isItYes"] = val === "Yes" ? true : false;
+      return updatedFormElements;
+    });
+  };
+
+  const handleFormElementValueChange = (index, event, val) => {
+    let finalValue = "";
+    if (val) {
+      finalValue = val;
+    } else {
+      let { value } = event?.target;
+      finalValue = value;
+    }
     setFormElements((prevFormElements) => {
       const updatedFormElements = [...prevFormElements];
       updatedFormElements[index] = {
         ...updatedFormElements[index],
-        value: value,
+        value: finalValue,
       };
       return updatedFormElements;
     });
@@ -86,14 +100,25 @@ function FormPage({ params }) {
         </div>
       </div>
       {formElements.map((el, index) =>
-        renderFinalFormElements(el?.name, el?.label, el?.value, (event) =>
-          handleFormElementValueChange(index, event)
+        renderFinalFormElements(
+          el?.name,
+          el?.label,
+          el?.value,
+          (event = {}, val = "") =>
+            handleFormElementValueChange(index, event, val),
+          el?.optionsList ?? [],
+          el?.isItYes ?? "",
+          (val) => handleYesNo(index, val)
         )
       )}
       <div className="flex justify-center">
-        <button className="btn-primary w-40 p-3" onClick={handleSubmit}>
+        <button className="btn-primary w-full p-3" onClick={handleSubmit}>
           Submit
         </button>
+      </div>
+
+      <div className="bg-sky-200 fixed bottom-4 right-4 p-3 w-56 flex justify-center rounded-3xl">
+        <span>Powered by FormVibe</span>
       </div>
     </div>
   );

@@ -17,7 +17,8 @@ export function renderFormElement(
   handleDelete,
   optionsList,
   handleDeleteRadioOption,
-  handleRadioOptions
+  handleRadioOptions,
+  handleOptionChange
 ) {
   switch (name) {
     case "Text Field":
@@ -178,7 +179,13 @@ export function renderFormElement(
           {(optionsList ?? []).map((opt, index) => (
             <div className="flex gap-3 items-center">
               <input type="radio" />
-              <label>{opt}</label>
+              <input
+                placeholder="Enter label name here"
+                type="text"
+                value={opt}
+                onChange={(e) => handleOptionChange(index, e.target.value)}
+                className="text-gray-700  font-semibold outline-none"
+              />
               <Trash2Icon
                 className="w-4 ml-3 cursor-pointer "
                 onClick={() => handleDeleteRadioOption(index)}

@@ -115,6 +115,15 @@ function BuilderPage({ params }) {
     setInitialRender(false);
   };
 
+  const handleOptionChange = (optIndex, value, index) => {
+    setFormElements((prevFormElements) => {
+      const updatedFormElements = [...prevFormElements];
+      updatedFormElements[index]["optionsList"][optIndex] = value;
+      return updatedFormElements;
+    });
+    setInitialRender(false);
+  };
+
   const handleDeleteOptions = (optIndex, elIndex) => {
     setFormElements((prevFormElements) => {
       const updatedFormElements = [...prevFormElements];
@@ -221,7 +230,8 @@ function BuilderPage({ params }) {
                 () => handleDeleteFormElement(index),
                 el?.optionsList ?? [],
                 (optIndex) => handleDeleteOptions(optIndex, index),
-                () => handleAddOptions(index)
+                () => handleAddOptions(index),
+                (optIndex, value) => handleOptionChange(optIndex, value, index)
               )
             )}
             {!formElements.length > 0 && (
