@@ -82,6 +82,10 @@ function BuilderPage({ params }) {
         value: "",
       };
 
+      if (item?.name === "Radio Buttons") {
+        newFormElement["optionsList"] = ["Option 1", "Option 2"];
+      }
+
       setFormElements([...formElements, { ...newFormElement }]);
       setInitialRender(false);
     },
@@ -99,6 +103,24 @@ function BuilderPage({ params }) {
     existingFormEls.splice(index, 1);
 
     setFormElements([...existingFormEls]);
+    setInitialRender(false);
+  };
+
+  const handleAddOptions = (index) => {
+    setFormElements((prevFormElements) => {
+      const updatedFormElements = [...prevFormElements];
+      updatedFormElements?.[index]?.["optionsList"].push("Option");
+      return updatedFormElements;
+    });
+    setInitialRender(false);
+  };
+
+  const handleDeleteOptions = (optIndex, elIndex) => {
+    setFormElements((prevFormElements) => {
+      const updatedFormElements = [...prevFormElements];
+      updatedFormElements?.[elIndex]?.["optionsList"]?.splice(optIndex, 1);
+      return updatedFormElements;
+    });
     setInitialRender(false);
   };
 
@@ -196,7 +218,10 @@ function BuilderPage({ params }) {
                 el.label,
                 (event) => handleFormElementLabelChange(index, event),
                 true,
-                () => handleDeleteFormElement(index)
+                () => handleDeleteFormElement(index),
+                el?.optionsList ?? [],
+                (optIndex) => handleDeleteOptions(optIndex, index),
+                () => handleAddOptions(index)
               )
             )}
             {!formElements.length > 0 && (

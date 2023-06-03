@@ -14,7 +14,10 @@ export function renderFormElement(
   label,
   onLabelChange,
   disabled,
-  handleDelete
+  handleDelete,
+  optionsList,
+  handleDeleteRadioOption,
+  handleRadioOptions
 ) {
   switch (name) {
     case "Text Field":
@@ -172,19 +175,20 @@ export function renderFormElement(
             onChange={onLabelChange}
             className="text-gray-700 text-lg  font-semibold outline-none"
           />
-          <div className="flex gap-3">
-            <input type="radio" />
-            <label>Option 1</label>
-          </div>
-          <div className="flex gap-3">
-            <input type="radio" />
-            <label>Option 2</label>
-          </div>
-          <div className="flex gap-3">
-            <input type="radio" />
-            <label>Option 3</label>
-          </div>
-          <button className="btn-secondary w-36">Add more option</button>
+          {(optionsList ?? []).map((opt, index) => (
+            <div className="flex gap-3 items-center">
+              <input type="radio" />
+              <label>{opt}</label>
+              <Trash2Icon
+                className="w-4 ml-3 cursor-pointer "
+                onClick={() => handleDeleteRadioOption(index)}
+              />
+            </div>
+          ))}
+
+          <button className="btn-secondary w-36" onClick={handleRadioOptions}>
+            Add more option
+          </button>
           <Trash2Icon
             className="w-4 absolute cursor-pointer right-4 top-4"
             onClick={handleDelete}
