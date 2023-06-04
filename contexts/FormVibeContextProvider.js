@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Account, Client, Databases, ID, Query } from "appwrite";
+import { Account, Client, Databases, ID, Query, Storage } from "appwrite";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import moment from "moment";
@@ -18,6 +18,7 @@ export default function FormvibeContextProvider({ children }) {
 
   const account = new Account(client);
   const databases = new Databases(client);
+  const storage = new Storage(client);
 
   useEffect(() => {
     getLoggedInUser();
@@ -257,6 +258,50 @@ export default function FormvibeContextProvider({ children }) {
     }
   };
 
+  const storeFile = async (file) => {
+    try {
+      const res = await storage.createFile(
+        process.env.BUCKET_ID,
+        ID.unique(),
+        file
+      );
+
+      return res?.$id;
+    } catch (err) {
+      toast(err?.message ?? "Network error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    }
+  };
+
+  const getFilePreview = async (fileId) => {
+    try {
+      const res = await storage.getFilePreview(process.env.BUCKET_ID, fileId);
+      return res?.href;
+    } catch (err) {
+      toast(err?.message ?? "Network error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    }
+  };
+
+  const getFileDownload = async () => {
+    try {
+      const res = await storage.getFileDownload(process.env.BUCKET_ID, fileId);
+      return res?.href;
+    } catch (err) {
+      toast(err?.message ?? "Network error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    }
+  };
+
   const exposedValues = {
     login,
     loginWithGithub,
@@ -270,6 +315,9 @@ export default function FormvibeContextProvider({ children }) {
     retrieveResponses,
     submitResponse,
     getLoggedInUser,
+    storeFile,
+    getFilePreview,
+    getFileDownload,
   };
 
   return (

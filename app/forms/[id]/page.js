@@ -2,6 +2,7 @@
 
 import { useFormVibeContext } from "@/contexts/FormVibeContextProvider";
 import { renderFormElement } from "@/lib/helpers";
+import { PencilIcon } from "lucide-react";
 import moment from "moment";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,6 +11,11 @@ import { useDrop } from "react-dnd";
 import { toast } from "react-toastify";
 
 function BuilderPage({ params }) {
+  const [formBanner, setFormBanner] = useState("");
+  const [formIcon, setFormIcon] = useState("");
+  const [formBannerPreview, setFormBannerPreview] = useState("");
+  const [formIconPreview, setFormIconPreview] = useState("");
+
   const [formElements, setFormElements] = useState([]);
   const [formName, setFormName] = useState("");
   const [formDescription, setFormDescription] = useState("");
@@ -18,7 +24,8 @@ function BuilderPage({ params }) {
   const router = useRouter();
   const [timer, setTimer] = useState();
   const [initialRender, setInitialRender] = useState(true);
-  const { retrieveFormBySlug, updateForm } = useFormVibeContext();
+  const { retrieveFormBySlug, updateForm, storeFile, getFilePreview } =
+    useFormVibeContext();
   console.log(params);
 
   useEffect(() => {
@@ -38,7 +45,15 @@ function BuilderPage({ params }) {
         setTimer();
       };
     }
-  }, [formName, formDescription, formElements, formId, initialRender]);
+  }, [
+    formName,
+    formDescription,
+    formElements,
+    formId,
+    initialRender,
+    formBanner,
+    formIcon,
+  ]);
 
   const updateFormMetaData = async (btnType = "") => {
     const payload = {
@@ -46,6 +61,8 @@ function BuilderPage({ params }) {
       form_description: formDescription,
       form_columns: JSON.stringify(formElements),
       form_type: "Airtable",
+      form_banner: formBanner ?? "",
+      form_icon: formIcon ?? "",
     };
     await updateForm(payload, formId);
     if (btnType === "save") {
@@ -69,6 +86,15 @@ function BuilderPage({ params }) {
     setFormElements(cols);
     setFormId(doc?.$id);
     setFormSlug(doc?.form_id);
+    if (doc?.form_banner) {
+      const bannerPreview = await getFilePreview(doc?.form_banner);
+      setFormBannerPreview(bannerPreview);
+    }
+
+    if (doc?.form_icon) {
+      const iconPreview = await getFilePreview(doc?.form_icon);
+      setFormIconPreview(iconPreview);
+    }
   };
 
   const [{ canDrop, isOver }, drop] = useDrop({
@@ -146,6 +172,44 @@ function BuilderPage({ params }) {
     setInitialRender(false);
   };
 
+  const handleFormIconChange = async (e) => {
+    const file = e.target.files?.[0];
+    console.log(file);
+    setInitialRender(false);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormIconPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+      const id = await storeFile(file);
+
+      setFormIcon(id);
+    } else {
+      setFormIconPreview("");
+      setFormIcon("");
+    }
+  };
+
+  const handleFormBannerChange = async (e) => {
+    const file = e.target.files?.[0];
+    setInitialRender(false);
+    console.log(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormBannerPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+      const id = await storeFile(file);
+
+      setFormBanner(id);
+    } else {
+      setFormBannerPreview("");
+      setFormBanner("");
+    }
+  };
+
   return (
     <div className="flex flex-col h-full w-full">
       <div className="flex gap-2 items-center px-9 py-7 h-8 w-full border-b border-zinc-300">
@@ -185,40 +249,74 @@ function BuilderPage({ params }) {
             ref={drop}
           >
             <div
-              className="flex justify-between w-full border border-zinc-200 rounded p-8 bg-white"
+              className="flex flex-col gap-8 items-center w-full border border-zinc-200 rounded bg-white pb-10"
               style={{
                 boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
               }}
             >
-              <div className="flex flex-col w-full gap-1 ">
+              <div className="flex text-gray-600 gap-2 justify-center items-center h-44 w-full bg-slate-200 hover:bg-slate-300 cursor-pointer border border-zinc-200 border-dashed relative">
+                {formBannerPreview && (
+                  <img
+                    src={formBannerPreview}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+                {!formBannerPreview && (
+                  <>
+                    <PencilIcon />
+                  </>
+                )}
                 <input
-                  type="text"
-                  value={formName}
-                  placeholder="Enter form name here"
-                  onChange={(e) => {
-                    setFormName(e.target.value);
-                    setInitialRender(false);
-                  }}
-                  className="outline-none py-2 font-semibold text-gray-600 text-lg"
-                />
-
-                <input
-                  type="text"
-                  value={formDescription}
-                  placeholder="Enter some description for the form (optional)"
-                  onChange={(e) => {
-                    setFormDescription(e.target.value);
-                    setInitialRender(false);
-                  }}
-                  className="text-gray-500 w-full outline-none py-2"
+                  type="file"
+                  id="formBanner"
+                  className="w-full h-full absolute inset-0 opacity-0"
+                  onChange={handleFormBannerChange}
                 />
               </div>
-              <div>
-                <img
-                  src="/assets/icons/imageUploadIcon.svg"
-                  alt="Upload Banner Image"
-                />
-                <input type="file" id="formIcon" className="hidden" />
+              <div className="bg-white rounded flex -mt-16 z-20 gap-4 flex-grow px-16 py-8 w-8/12">
+                <div className="border border-dashed boder flex justify-center items-center w-28 h-20 rounded hover:bg-slate-100 cursor-pointer border-zinc-300 relative">
+                  {formIconPreview && (
+                    <img
+                      src={formIconPreview}
+                      className="w-full h-full object-contain"
+                    />
+                  )}
+                  {!formIconPreview && (
+                    <img
+                      src="/assets/icons/ImageUpload.svg"
+                      alt="Upload Banner Image"
+                    />
+                  )}
+                  <input
+                    type="file"
+                    id="formIcon"
+                    className="absolute w-full h-full inset-0 opacity-0"
+                    onChange={handleFormIconChange}
+                  />
+                </div>
+                <div className="flex flex-col flex-grow w-full gap-1 ">
+                  <input
+                    type="text"
+                    value={formName}
+                    placeholder="Enter form name here"
+                    onChange={(e) => {
+                      setFormName(e.target.value);
+                      setInitialRender(false);
+                    }}
+                    className="outline-none py-2 font-semibold text-gray-600 text-lg"
+                  />
+
+                  <input
+                    type="text"
+                    value={formDescription}
+                    placeholder="Enter some description for the form (optional)"
+                    onChange={(e) => {
+                      setFormDescription(e.target.value);
+                      setInitialRender(false);
+                    }}
+                    className="text-gray-500 w-full outline-none py-2"
+                  />
+                </div>
               </div>
             </div>
             {formElements.map((el, index) =>
@@ -235,13 +333,13 @@ function BuilderPage({ params }) {
               )
             )}
             {!formElements.length > 0 && (
-              <div className="p-8 h-96 flex justify-center flex-col items-center">
+              <div className="rounded p-8 h-96 flex gap-3 justify-center items-center bg-white  w-full">
                 <img
                   src="/assets/icons/dragDropIcon.svg"
                   alt="Drag and Drop Icon"
-                  className="w-12"
+                  className="w-8"
                 />
-                <span className="text-gray-600">
+                <span className="text-gray-500">
                   Drag elements from left sidebar
                 </span>
               </div>
