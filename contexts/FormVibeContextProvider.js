@@ -302,6 +302,49 @@ export default function FormvibeContextProvider({ children }) {
     }
   };
 
+  const retrieveUser = async (userId) => {
+    try {
+      const res = await databases.listDocuments(
+        process.env.DATABASE_ID,
+        process.env.USER_COLLECTION_ID,
+        [Query.equal("id", userId)]
+      );
+
+      return res;
+    } catch (err) {
+      toast(err?.message ?? "Network error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    }
+  };
+
+  const updateUser = async (id, payload) => {
+    try {
+      setIsLoading(true);
+      const res = await databases.updateDocument(
+        process.env.DATABASE_ID,
+        process.env.USER_COLLECTION_ID,
+        id,
+        payload
+      );
+      toast("User account updated successfully", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    } catch (err) {
+      toast(err?.message ?? "Network error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const exposedValues = {
     login,
     loginWithGithub,
@@ -318,6 +361,8 @@ export default function FormvibeContextProvider({ children }) {
     storeFile,
     getFilePreview,
     getFileDownload,
+    retrieveUser,
+    updateUser,
   };
 
   return (

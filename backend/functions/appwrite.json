@@ -1,0 +1,18 @@
+{
+  "projectId": "646cf0f0a4f72eb037fa",
+  "projectName": "formvibe",
+  "functions": [
+    {
+      "$id": "647df3e4a125cde358a0",
+      "name": "add-user",
+      "runtime": "node-16.0",
+      "path": "functions/add-user",
+      "entrypoint": "src/index.js",
+      "ignore": ["node_modules", ".npm"],
+      "execute": [],
+      "events": ["users . * . create"],
+      "schedule": "",
+      "timeout": 15
+    }
+  ]
+}

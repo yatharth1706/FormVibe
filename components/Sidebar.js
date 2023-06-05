@@ -1,24 +1,27 @@
 "use client";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
-function NavLink({ iconImg, linkName, classDesc, isActive }) {
+function NavLink({ iconImg, linkName, classDesc, isActive, link }) {
   return (
-    <div
-      className={
-        "p-[10px] flex gap-3 items-center hover:shadow-xl cursor-pointer hover:bg-white hover:border hover:border-zinc-200 rounded " +
-        (isActive ? "bg-gray-200 shadow-lg font-semibold" : "")
-      }
-    >
-      <div className="w-8">
-        <img
-          src={"/assets/icons/" + iconImg}
-          className={classDesc}
-          alt="Form Icon"
-        />
+    <Link href={link}>
+      <div
+        className={
+          "p-[10px] flex gap-3 items-center hover:shadow-xl cursor-pointer hover:bg-white hover:border hover:border-zinc-200 rounded " +
+          (isActive ? "bg-gray-200 shadow-lg font-semibold" : "")
+        }
+      >
+        <div className="w-8">
+          <img
+            src={"/assets/icons/" + iconImg}
+            className={classDesc}
+            alt="Form Icon"
+          />
+        </div>
+        {linkName}
       </div>
-      {linkName}
-    </div>
+    </Link>
   );
 }
 
@@ -30,34 +33,40 @@ function Sidebar() {
       <NavLink
         iconImg="formIcon.svg"
         linkName="My Forms"
-        isActive={path.includes("/app")}
+        isActive={path === "/app"}
+        link="/app"
       />
       <NavLink
         iconImg="templatesIcon.svg"
         linkName="Templates"
-        isActive={path.includes("/templates")}
+        isActive={path === "/app/templates"}
+        link="/app/templates"
       />
       <NavLink
         iconImg="membersIcon.svg"
         linkName="Members"
-        isActive={path.includes("/members")}
+        isActive={path === "/app/members"}
+        link="/app/members"
       />
       <NavLink
         iconImg="integrationIcon.svg"
         linkName="Integrations"
         classDesc="w-7"
-        isActive={path.includes("/integrations")}
+        isActive={path === "/app/integrations"}
+        link="/app/integrations"
       />
       <NavLink
         iconImg="accountsIcon.svg"
         linkName="Account"
         classDesc="w-6"
-        isActive={path.includes("/myaccount")}
+        isActive={path === "/app/account"}
+        link="/app/account"
       />
       <NavLink
         iconImg="helpIcon.svg"
         linkName="Help"
-        isActive={path.includes("/help")}
+        isActive={path === "/app/help"}
+        link="/app/help"
       />
     </div>
   );
