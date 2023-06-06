@@ -3,20 +3,15 @@ import FormActionCard from "@/components/FormActionCard";
 import FormTable from "@/components/FormTable";
 import { useFormVibeContext } from "@/contexts/FormVibeContextProvider";
 import { useRouter } from "next/navigation";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 import React, { useEffect, useState } from "react";
+import TemplatesModal from "@/components/TemplatesModal";
 
 function MyForms() {
   const [forms, setForms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isTemplatesModalOpen, setIsTemplatesModalOpen] = useState(false);
   const router = useRouter();
   const { retrieveForms, createForm } = useFormVibeContext();
 
@@ -65,7 +60,7 @@ function MyForms() {
           </DialogTrigger>
           <DialogContent
             className="bg-white"
-            style={{ maxWidth: "fit-content" }}
+            style={{ maxWidth: "fit-content", padding: "80px" }}
           >
             <div className="flex gap-8 w-full p-6">
               <FormActionCard
@@ -76,10 +71,15 @@ function MyForms() {
               <FormActionCard
                 title="Use Template"
                 description="Choose from pre defined templates to use for your form"
+                onClick={() => setIsTemplatesModalOpen(true)}
               />
               <FormActionCard
                 title="Use AI"
                 description="Use our AI to tell your requirements and we will create form according to that"
+              />
+              <TemplatesModal
+                isTemplatesModalOpen={isTemplatesModalOpen}
+                setIsTemplatesModalOpen={setIsTemplatesModalOpen}
               />
             </div>
           </DialogContent>

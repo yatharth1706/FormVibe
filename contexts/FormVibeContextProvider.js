@@ -140,7 +140,11 @@ export default function FormvibeContextProvider({ children }) {
     return formId;
   }
 
-  const createForm = async (createdBy) => {
+  const createForm = async (
+    createdBy,
+    formName = undefined,
+    formColumns = undefined
+  ) => {
     try {
       const recordId = ID.unique();
       const res = await databases.createDocument(
@@ -149,8 +153,11 @@ export default function FormvibeContextProvider({ children }) {
         recordId,
         {
           form_id: generateRandomFormId(),
-          form_name: "My Form",
-          form_columns: JSON.stringify([]),
+          form_name: formName === undefined ? "My Form" : formName,
+          form_columns:
+            formColumns === undefined
+              ? JSON.stringify([])
+              : JSON.stringify(formColumns),
           form_type: "Airtable",
           created_by: createdBy,
           created_on: moment().format("YYYY-MM-DD HH:mm:ss"),

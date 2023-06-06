@@ -8,8 +8,10 @@ function NavLink({ iconImg, linkName, classDesc, isActive, link }) {
     <Link href={link}>
       <div
         className={
-          "p-[10px] flex gap-3 items-center hover:shadow-xl cursor-pointer hover:bg-white hover:border hover:border-zinc-200 rounded " +
-          (isActive ? "bg-gray-200 shadow-lg font-semibold" : "")
+          "p-[12px] flex gap-3 items-center hover:shadow-xl cursor-pointer hover:bg-white hover:border hover:border-zinc-200 rounded " +
+          (isActive
+            ? "bg-slate-200 border border-zinc-100 font-semibold text-gray-600"
+            : "")
         }
       >
         <div className="w-8">

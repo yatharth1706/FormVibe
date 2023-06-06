@@ -70,7 +70,7 @@ function MyAccount() {
   };
 
   return (
-    <div className="flex flex-col px-12 py-8 gap-6 w-full">
+    <div className="flex flex-col px-12 py-12 gap-6 w-full">
       <h1>My Account</h1>
 
       <div className="w-full h-96 border border-zinc-200 rounded p-12">
