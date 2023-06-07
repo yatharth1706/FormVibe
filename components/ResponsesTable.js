@@ -31,7 +31,9 @@ function ResponsesTable({ formResponses }) {
             {formResponses?.map((form) => (
               <TableRow key={form?.$id}>
                 {JSON.parse(form?.form_elements).map((el) => (
-                  <TableCell key={el?.id}>{el?.value}</TableCell>
+                  <TableCell key={el?.id}>
+                    {el?.value ? el?.value : el?.fileName ? el?.fileName : ""}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}

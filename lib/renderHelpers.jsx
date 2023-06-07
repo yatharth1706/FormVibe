@@ -9,7 +9,10 @@ export function renderFinalFormElements(
   handleValueChange,
   optionsList,
   isItYes,
-  handleYesNo
+  handleYesNo,
+  handleFileChange,
+  fileName,
+  errorMessage
 ) {
   switch (name) {
     case "Text Field":
@@ -30,6 +33,9 @@ export function renderFinalFormElements(
             value={value}
             onChange={handleValueChange}
           />
+          {errorMessage && (
+            <span className="text-red-500 text-xs">{errorMessage}</span>
+          )}
         </div>
       );
     case "File Upload":
@@ -43,10 +49,24 @@ export function renderFinalFormElements(
           <label className="text-gray-700 text-lg font-semibold outline-none">
             {label}
           </label>
-          <div className="h-44 w-full border border-zinc-200 rounded p-8 flex flex-col gap-3 justify-center items-center bg-sky-50">
-            <UploadIcon />
-            <p>Select file to upload</p>
+          <div className="relative h-44 w-full border border-zinc-200 rounded p-8 flex flex-col gap-3 justify-center items-center bg-slate-100 hover:bg-slate-200">
+            {fileName ? (
+              <span>{fileName}</span>
+            ) : (
+              <>
+                <UploadIcon />
+                <p>Select file to upload</p>
+              </>
+            )}
+            <input
+              type="file"
+              className="absolute w-full h-full opacity-0"
+              onChange={handleFileChange}
+            />
           </div>
+          {errorMessage && (
+            <span className="text-red-500 text-xs">{errorMessage}</span>
+          )}
         </div>
       );
     case "Date":
@@ -67,6 +87,9 @@ export function renderFinalFormElements(
             value={value}
             onChange={handleValueChange}
           />
+          {errorMessage && (
+            <span className="text-red-500 text-xs">{errorMessage}</span>
+          )}
         </div>
       );
     case "Phone Number":
@@ -88,6 +111,9 @@ export function renderFinalFormElements(
             value={value}
             onChange={(value) => handleValueChange({}, value)}
           />
+          {errorMessage && (
+            <span className="text-red-500 text-xs">{errorMessage}</span>
+          )}
         </div>
       );
     case "Text Area":
@@ -106,6 +132,9 @@ export function renderFinalFormElements(
             value={value}
             onChange={handleValueChange}
           />
+          {errorMessage && (
+            <span className="text-red-500 text-xs">{errorMessage}</span>
+          )}
         </div>
       );
 
@@ -137,6 +166,9 @@ export function renderFinalFormElements(
               </label>
             </div>
           ))}
+          {errorMessage && (
+            <span className="text-red-500 text-xs">{errorMessage}</span>
+          )}
         </div>
       );
 
@@ -177,6 +209,9 @@ export function renderFinalFormElements(
             <X />
             No
           </div>
+          {errorMessage && (
+            <span className="text-red-500 text-xs">{errorMessage}</span>
+          )}
         </div>
       );
     default:
