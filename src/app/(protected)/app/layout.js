@@ -16,7 +16,11 @@ export default function AccountsLayout({ children }) {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col gap-2 h-screen w-full justify-center items-center">
+        <img src="/assets/Icon.png" alt="Logo" className="animate-pulse" />
+      </div>
+    );
   }
 
   return (

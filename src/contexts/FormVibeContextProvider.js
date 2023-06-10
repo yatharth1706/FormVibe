@@ -8,7 +8,7 @@ import moment from "moment";
 const FormVibeContext = createContext(null);
 
 export default function FormvibeContextProvider({ children }) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
 
@@ -19,10 +19,6 @@ export default function FormvibeContextProvider({ children }) {
   const account = new Account(client);
   const databases = new Databases(client);
   const storage = new Storage(client);
-
-  useEffect(() => {
-    getLoggedInUser();
-  }, []);
 
   const login = async (email, password) => {
     try {

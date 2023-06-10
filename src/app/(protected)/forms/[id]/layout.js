@@ -9,13 +9,6 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 export default function AccountsLayout({ children }) {
   const { getLoggedInUser, isLoading } = useFormVibeContext();
 
-  useEffect(() => {
-    getLoggedInUser();
-  }, []);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
   return (
     <div className="flex flex-col w-full">
       <NavigationBar />
