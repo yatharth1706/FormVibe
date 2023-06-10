@@ -25,7 +25,6 @@ function BuilderPage({ params }) {
   const [formIcon, setFormIcon] = useState("");
   const [formBannerPreview, setFormBannerPreview] = useState("");
   const [formIconPreview, setFormIconPreview] = useState("");
-
   const [formElements, setFormElements] = useState([]);
   const [formName, setFormName] = useState("");
   const [formDescription, setFormDescription] = useState("");
@@ -38,6 +37,7 @@ function BuilderPage({ params }) {
     useFormVibeContext();
   const [currActiveFormElement, setCurrActiveFormElement] = useState(-1);
   const [tab, setTab] = useState("Form");
+  const [formType, setFormType] = useState("");
 
   useEffect(() => {
     fetchForm();
@@ -64,6 +64,7 @@ function BuilderPage({ params }) {
     initialRender,
     formBanner,
     formIcon,
+    formType,
   ]);
 
   const updateFormMetaData = async (btnType = "") => {
@@ -71,7 +72,7 @@ function BuilderPage({ params }) {
       form_name: formName,
       form_description: formDescription,
       form_columns: JSON.stringify(formElements),
-      form_type: "Airtable",
+      form_type: formType,
       form_banner: formBanner ?? "",
       form_icon: formIcon ?? "",
     };
@@ -97,6 +98,7 @@ function BuilderPage({ params }) {
     setFormElements(cols);
     setFormId(doc?.$id);
     setFormSlug(doc?.form_id);
+    setFormType(doc?.form_type);
     if (doc?.form_banner) {
       const bannerPreview = await getFilePreview(doc?.form_banner);
       setFormBannerPreview(bannerPreview);
@@ -522,9 +524,13 @@ function BuilderPage({ params }) {
                 </div>
               </div>
               <h2 className="fon">Render form as </h2>
-              <select className="p-3 rounded bg-white border border-gray-200 outline-sky-400">
+              <select
+                className="p-3 rounded bg-white border border-gray-200 outline-sky-400"
+                value={formType}
+                onChange={(e) => setFormType(e.target.value)}
+              >
                 <option>Airtable</option>
-                <option>Formvibe</option>
+                <option>Typeform</option>
               </select>
             </div>
           )}

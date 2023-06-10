@@ -16,10 +16,10 @@ function NavigationBar() {
   const getUserInfo = async () => {
     if (typeof window !== undefined) {
       let userObj = JSON.parse(
-        window.localStorage.getItem("FormVibeUser") ?? ""
+        window.localStorage.getItem("FormVibeUser") ?? "{}"
       );
 
-      if (userObj) {
+      if (Object.keys(userObj).length > 0) {
         let userId = userObj?.$id;
         const res = await retrieveUser(userId);
         console.log(res);
