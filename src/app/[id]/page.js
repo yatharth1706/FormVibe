@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 import { renderFinalFormElements } from "@/src/lib/renderHelpers";
 import { toast } from "react-toastify";
-import Loading from "@/src/components/Loading";
+import FullPageLoading from "@/src/components/FullPageLoading";
 import Link from "next/link";
 
 function FormPage({ params }) {
@@ -125,7 +125,7 @@ function FormPage({ params }) {
     let tempFormEl = [...formElements];
     let isValid = true;
     for (let i = 0; i < tempFormEl.length; i++) {
-      if (tempFormEl[i]?.value?.trim() === "") {
+      if (tempFormEl[i]["isRequired"] && tempFormEl[i]?.value?.trim() === "") {
         isValid = false;
         tempFormEl[i]["errorMessage"] = "Required";
       } else {
@@ -139,7 +139,7 @@ function FormPage({ params }) {
   };
 
   return isFetchingForm ? (
-    <Loading />
+    <FullPageLoading />
   ) : (
     <div className="w-full mx-auto  flex flex-col gap-14">
       {formSubmittedSuccessfully ? (

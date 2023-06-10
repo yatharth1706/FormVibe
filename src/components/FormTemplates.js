@@ -3,9 +3,10 @@ import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 import { AppWindow, Book } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import Loading from "./Loading";
 
 function FormTemplates() {
-  const { createForm } = useFormVibeContext();
+  const { createForm, isLoading } = useFormVibeContext();
   const router = useRouter();
 
   const jobAppFormEls = [
@@ -89,14 +90,14 @@ function FormTemplates() {
   return (
     <div className="grid grid-cols-2 gap-12">
       <div
-        className="w-full h-72 border border-zinc-200 rounded p-12 flex flex-col gap-3 justify-center items-center cursor-pointer bg-slate-100 hover:bg-slate-200"
+        className="relative w-full h-72 border border-zinc-200 rounded p-12 flex flex-col gap-3 justify-center items-center cursor-pointer bg-slate-100 hover:bg-slate-200"
         onClick={() => createFormFromTemplate("job")}
       >
         <AppWindow />
         <span>Job Application Form</span>
       </div>
       <div
-        className="w-full h-72 border border-zinc-200 rounded p-12 flex flex-col gap-3 justify-center items-center cursor-pointer bg-slate-100 hover:bg-slate-200"
+        className="relative w-full h-72 border border-zinc-200 rounded p-12 flex flex-col gap-3 justify-center items-center cursor-pointer bg-slate-100 hover:bg-slate-200"
         onClick={() => createFormFromTemplate("survey")}
       >
         <Book />

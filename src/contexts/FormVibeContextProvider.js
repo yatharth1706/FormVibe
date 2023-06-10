@@ -325,7 +325,7 @@ export default function FormvibeContextProvider({ children }) {
 
   const updateUser = async (id, payload) => {
     try {
-      setIsLoading(true);
+      // setIsLoading(true);
       const res = await databases.updateDocument(
         process.env.DATABASE_ID,
         process.env.USER_COLLECTION_ID,
@@ -344,7 +344,7 @@ export default function FormvibeContextProvider({ children }) {
         theme: "light",
       });
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 
