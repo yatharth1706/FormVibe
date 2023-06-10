@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 function MyAccount() {
   const [userInfo, setUserInfo] = useState({});
   const [profilePicPreview, setProfilePicPreview] = useState("");
+  const [newProfilePic, setNewProfilePic] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [profilePic, setProfilePic] = useState("");
@@ -25,17 +26,19 @@ function MyAccount() {
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfilePicPreview(reader.result);
+        setNewProfilePic(reader.result);
       };
       reader.readAsDataURL(file);
     } else {
       setProfilePicPreview("");
+      setNewProfilePic("");
       setProfilePic("");
     }
   };
 
   const handleSave = async () => {
     let id = "";
-    if (profilePicPreview) {
+    if (newProfilePic) {
       const file = document.getElementById("profilePic").files[0];
       id = await storeFile(file);
       setProfilePicPreview("");
@@ -44,8 +47,9 @@ function MyAccount() {
     await updateUser(userInfo?.$id, {
       name,
       email,
-      profile_pic: id ? id : profilePic,
+      profile_pic: id ? id : userInfo?.profile_pic,
     });
+    await fetchUser();
   };
 
   const fetchUser = async () => {
@@ -64,6 +68,7 @@ function MyAccount() {
     if (doc?.profile_pic) {
       let url = await getFilePreview(doc?.profile_pic);
       setProfilePic(url);
+      setProfilePicPreview(url);
     } else {
       setProfilePic("");
     }
@@ -76,13 +81,6 @@ function MyAccount() {
       <div className="w-full h-96 border border-zinc-200 rounded p-12">
         <div className="flex gap-24">
           <div className="relative cursor-pointer hover:bg-slate-200 rounded-full h-44 w-44 border border-zinc-300 flex justify-center items-center">
-            {profilePic && (
-              <img
-                src={profilePic ?? ""}
-                alt="Profile pic"
-                className="w-full h-full rounded-full object-cover object-center"
-              />
-            )}
             {profilePicPreview && (
               <img
                 src={profilePicPreview}

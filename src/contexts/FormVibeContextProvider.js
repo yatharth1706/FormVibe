@@ -48,8 +48,8 @@ export default function FormvibeContextProvider({ children }) {
     try {
       const response = await account.createOAuth2Session(
         "google",
-        "http://localhost:3000/app",
-        "http://localhost:3000/login"
+        process.env.NEXT_PUBLIC_APP_URL + "app",
+        process.env.NEXT_PUBLIC_APP_URL + "http://localhost:3000/login"
       );
     } catch (err) {
       toast(err?.message ?? "Network Error", {
