@@ -26,13 +26,14 @@ function FormElement({ fileName, elementName }) {
 
 function FormElementsContainer() {
   return (
-    <div className="px-9 gap-5 flex flex-col">
+    <div className="w-full px-8 py-6 gap-5 flex flex-col">
+      <h2 className="font-semibold">Form Elements</h2>
       <input
         type="search"
         className="border border-zinc-200 p-2 rounded outline-sky-400 outline-offset-0"
         placeholder="Search elements"
       />
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col mt-2 gap-8">
         <FormElement elementName="Text Field" fileName="textIcon.svg" />
         <FormElement elementName="Phone Number" fileName="phoneIcon.svg" />
         <FormElement elementName="Text Area" fileName="textAreaIcon.svg" />

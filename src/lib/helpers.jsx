@@ -1,11 +1,4 @@
-import {
-  CrossIcon,
-  Trash2,
-  Trash2Icon,
-  UploadIcon,
-  Check,
-  X,
-} from "lucide-react";
+import { Trash2Icon, UploadIcon, Check, X } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css"; // Import the default CSS styles
 

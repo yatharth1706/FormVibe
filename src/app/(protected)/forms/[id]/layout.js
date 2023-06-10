@@ -1,5 +1,4 @@
 "use client";
-import FormBuilderSidebar from "@/src/components/FormBuilderSidebar";
 import NavigationBar from "@/src/components/NavigationBar";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 import { useEffect } from "react";
@@ -26,7 +25,6 @@ export default function AccountsLayout({ children }) {
       <NavigationBar />
       <DndProvider backend={HTML5Backend}>
         <div className="flex w-full h-screen">
-          <FormBuilderSidebar />
           <div className="w-full h-full">{children}</div>
         </div>
       </DndProvider>
