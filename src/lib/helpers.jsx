@@ -10,6 +10,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css"; // Import the default CSS styles
 
 export function renderFormElement(
+  index,
   name,
   label,
   onLabelChange,
@@ -18,17 +19,25 @@ export function renderFormElement(
   optionsList,
   handleDeleteRadioOption,
   handleRadioOptions,
-  handleOptionChange
+  handleOptionChange,
+  handleActiveFormElement,
+  currActiveFormEl
 ) {
+  const isActive = index === currActiveFormEl;
+  console.log(isActive, name);
   switch (name) {
     case "Text Field":
       return (
         <div
-          className="flex flex-col gap-6 w-full rounded p-8  hover:shadow border border-zinc-200"
+          className={
+            "flex flex-col gap-6 w-full rounded p-8  hover:shadow border border-zinc-200 cursor-pointer hover:border-green-400 " +
+            (isActive ? "border-sky-300" : "")
+          }
           style={{
             position: "relative",
             boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
           }}
+          onClick={handleActiveFormElement}
         >
           <input
             type="text"
@@ -52,11 +61,15 @@ export function renderFormElement(
     case "File Upload":
       return (
         <div
-          className="flex flex-col gap-6 w-full p-8 border border-zinc-200 "
+          className={
+            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
+            (isActive === true ? "border border-sky-300 " : "")
+          }
           style={{
             position: "relative",
             boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
           }}
+          onClick={handleActiveFormElement}
         >
           <input
             type="text"
@@ -79,11 +92,15 @@ export function renderFormElement(
     case "Date":
       return (
         <div
-          className="flex flex-col gap-6 w-full p-8 border border-zinc-200"
+          className={
+            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
+            (isActive ? "border-sky-300" : "")
+          }
           style={{
             position: "relative",
             boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
           }}
+          onClick={handleActiveFormElement}
         >
           <input
             placeholder="Enter label name here"
@@ -107,11 +124,15 @@ export function renderFormElement(
     case "Phone Number":
       return (
         <div
-          className="flex flex-col gap-6 w-full p-8 border border-zinc-200"
+          className={
+            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
+            (isActive ? "border-sky-300" : "")
+          }
           style={{
             position: "relative",
             boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
           }}
+          onClick={handleActiveFormElement}
         >
           <input
             placeholder="Enter label name here"
@@ -136,11 +157,15 @@ export function renderFormElement(
     case "Text Area":
       return (
         <div
-          className="flex flex-col gap-6 w-full p-8 border border-zinc-200"
+          className={
+            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
+            (isActive ? "border-sky-300" : "")
+          }
           style={{
             position: "relative",
             boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
           }}
+          onClick={handleActiveFormElement}
         >
           <input
             placeholder="Enter label name here"
@@ -163,11 +188,15 @@ export function renderFormElement(
     case "Radio Buttons":
       return (
         <div
-          className="flex flex-col gap-6 w-full p-8 border border-zinc-200"
+          className={
+            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
+            (isActive ? "border-sky-300" : "")
+          }
           style={{
             position: "relative",
             boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
           }}
+          onClick={handleActiveFormElement}
         >
           <input
             placeholder="Enter label name here"
@@ -206,11 +235,15 @@ export function renderFormElement(
     case "Yes / No":
       return (
         <div
-          className="flex flex-col gap-6 w-full p-8 border border-zinc-200"
+          className={
+            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
+            (isActive ? "border-sky-300" : "")
+          }
           style={{
             position: "relative",
             boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
           }}
+          onClick={handleActiveFormElement}
         >
           <input
             placeholder="Enter label name here"

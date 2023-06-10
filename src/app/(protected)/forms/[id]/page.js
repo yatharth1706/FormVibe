@@ -1,5 +1,6 @@
 "use client";
 
+import { Switch } from "@/src/components/ui/switch";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 import { renderFormElement } from "@/src/lib/helpers";
 import { PencilIcon } from "lucide-react";
@@ -26,6 +27,7 @@ function BuilderPage({ params }) {
   const [initialRender, setInitialRender] = useState(true);
   const { retrieveFormBySlug, updateForm, storeFile, getFilePreview } =
     useFormVibeContext();
+  const [currActiveFormElement, setCurrActiveFormElement] = useState(-1);
   console.log(params);
 
   useEffect(() => {
@@ -106,6 +108,7 @@ function BuilderPage({ params }) {
         name: item.name,
         label: "Label",
         value: "",
+        isRequired: true,
       };
 
       if (item?.name === "Radio Buttons") {
@@ -139,6 +142,23 @@ function BuilderPage({ params }) {
       return updatedFormElements;
     });
     setInitialRender(false);
+  };
+
+  const handleIsRequiredChange = (currActiveFormElement, val) => {
+    setFormElements((prevFormElements) => {
+      const updatedFormElements = [...prevFormElements];
+      updatedFormElements[currActiveFormElement]["isRequired"] = val;
+      return updatedFormElements;
+    });
+    setInitialRender(false);
+  };
+
+  useEffect(() => {
+    console.log(currActiveFormElement);
+  }, [currActiveFormElement]);
+
+  const handleActiveFormElement = (index) => {
+    setCurrActiveFormElement(index);
   };
 
   const handleOptionChange = (optIndex, value, index) => {
@@ -321,6 +341,7 @@ function BuilderPage({ params }) {
             </div>
             {formElements.map((el, index) =>
               renderFormElement(
+                index,
                 el.name,
                 el.label,
                 (event) => handleFormElementLabelChange(index, event),
@@ -329,7 +350,9 @@ function BuilderPage({ params }) {
                 el?.optionsList ?? [],
                 (optIndex) => handleDeleteOptions(optIndex, index),
                 () => handleAddOptions(index),
-                (optIndex, value) => handleOptionChange(optIndex, value, index)
+                (optIndex, value) => handleOptionChange(optIndex, value, index),
+                () => handleActiveFormElement(index),
+                currActiveFormElement
               )
             )}
             {!formElements.length > 0 && (
@@ -346,11 +369,32 @@ function BuilderPage({ params }) {
             )}
           </div>
         </div>
-        <div className="w-3/12 p-8 flex flex-col gap-2">
-          <h1 className="font-medium">Customization</h1>
-          <img src="/assets/UnderLine.png" className="w-28" />
+        <div className="w-3/12 p-8 flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
+            <h1 className="font-medium">Settings</h1>
+            <img src="/assets/UnderLine.png" className="w-28" />
+          </div>
 
-          <div className="flex flex-col mt-3">Coming Soon ...</div>
+          <div>
+            {currActiveFormElement === -1 && (
+              <div className="flex flex-col mt-3 text-zinc-600">
+                Select form element from the left to see its settings
+              </div>
+            )}
+
+            {currActiveFormElement >= 0 && (
+              <div className="flex items-center gap-4">
+                <span>Is Required</span>
+
+                <Switch
+                  checked={formElements[currActiveFormElement]["isRequired"]}
+                  onCheckedChange={(val) =>
+                    handleIsRequiredChange(currActiveFormElement, val)
+                  }
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
