@@ -197,6 +197,7 @@ function FormPage({ params }) {
 
             {formElements.map((el, index) =>
               renderFinalFormElements(
+                index,
                 el?.name,
                 el?.label,
                 el?.value,

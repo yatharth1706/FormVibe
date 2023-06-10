@@ -32,7 +32,7 @@ function FormTable({ forms }) {
           </TableHeader>
           <TableBody>
             {forms.map((form) => (
-              <TableRow>
+              <TableRow key={form?.form_id}>
                 <TableCell
                   className="cursor-pointer"
                   onClick={() => router.push("/forms/" + form?.form_id)}

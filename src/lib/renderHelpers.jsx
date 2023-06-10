@@ -3,6 +3,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css"; // Import the default CSS styles
 
 export function renderFinalFormElements(
+  index,
   name,
   label,
   value,
@@ -18,6 +19,7 @@ export function renderFinalFormElements(
     case "Text Field":
       return (
         <div
+          key={index.toString() + name}
           className="flex flex-col gap-2 w-full "
           style={{
             position: "relative",
@@ -41,6 +43,7 @@ export function renderFinalFormElements(
     case "File Upload":
       return (
         <div
+          key={index.toString() + name}
           className="flex flex-col gap-2 w-full  "
           style={{
             position: "relative",
@@ -72,6 +75,7 @@ export function renderFinalFormElements(
     case "Date":
       return (
         <div
+          key={index.toString() + name}
           className="flex flex-col gap-2 w-full "
           style={{
             position: "relative",
@@ -95,6 +99,7 @@ export function renderFinalFormElements(
     case "Phone Number":
       return (
         <div
+          key={index.toString() + name}
           className="flex flex-col gap-6 w-full"
           style={{
             position: "relative",
@@ -119,6 +124,7 @@ export function renderFinalFormElements(
     case "Text Area":
       return (
         <div
+          key={index.toString() + name}
           className="flex flex-col gap-6 w-full"
           style={{
             position: "relative",
@@ -141,6 +147,7 @@ export function renderFinalFormElements(
     case "Radio Buttons":
       return (
         <div
+          key={index.toString() + name}
           className="flex flex-col gap-6 w-full"
           style={{
             position: "relative",
@@ -153,7 +160,10 @@ export function renderFinalFormElements(
             {label}
           </label>
           {(optionsList ?? []).map((opt, index) => (
-            <div className="flex gap-3 items-center">
+            <div
+              className="flex gap-3 items-center"
+              key={(opt ?? "") + index.toString()}
+            >
               <input
                 id={`${label}-${index}`}
                 name={label}
@@ -175,6 +185,7 @@ export function renderFinalFormElements(
     case "Yes / No":
       return (
         <div
+          key={index.toString() + name}
           className="flex flex-col gap-6 w-full"
           style={{
             position: "relative",

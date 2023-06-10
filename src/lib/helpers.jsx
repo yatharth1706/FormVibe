@@ -29,6 +29,7 @@ export function renderFormElement(
     case "Text Field":
       return (
         <div
+          key={index.toString() + name}
           className={
             "flex flex-col gap-6 w-full rounded p-8  hover:shadow border border-zinc-200 cursor-pointer hover:border-green-400 " +
             (isActive ? "border-sky-300" : "")
@@ -61,6 +62,7 @@ export function renderFormElement(
     case "File Upload":
       return (
         <div
+          key={index.toString() + name}
           className={
             "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
             (isActive === true ? "border border-sky-300 " : "")
@@ -92,6 +94,7 @@ export function renderFormElement(
     case "Date":
       return (
         <div
+          key={index.toString() + name}
           className={
             "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
             (isActive ? "border-sky-300" : "")
@@ -124,6 +127,7 @@ export function renderFormElement(
     case "Phone Number":
       return (
         <div
+          key={index.toString() + name}
           className={
             "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
             (isActive ? "border-sky-300" : "")
@@ -157,6 +161,7 @@ export function renderFormElement(
     case "Text Area":
       return (
         <div
+          key={index.toString() + name}
           className={
             "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
             (isActive ? "border-sky-300" : "")
@@ -188,6 +193,7 @@ export function renderFormElement(
     case "Radio Buttons":
       return (
         <div
+          key={index.toString() + name}
           className={
             "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
             (isActive ? "border-sky-300" : "")
@@ -206,7 +212,10 @@ export function renderFormElement(
             className="text-gray-700 text-lg  font-semibold outline-none"
           />
           {(optionsList ?? []).map((opt, index) => (
-            <div className="flex gap-3 items-center">
+            <div
+              className="flex gap-3 items-center"
+              key={(opt ?? "") + index.toString()}
+            >
               <input type="radio" />
               <input
                 placeholder="Enter label name here"
@@ -235,6 +244,7 @@ export function renderFormElement(
     case "Yes / No":
       return (
         <div
+          key={index.toString() + name}
           className={
             "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
             (isActive ? "border-sky-300" : "")
