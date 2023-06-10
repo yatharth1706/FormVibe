@@ -263,7 +263,7 @@ function BuilderPage({ params }) {
                 )}
                 {!formBannerPreview && (
                   <>
-                    <PencilIcon />
+                    <PencilIcon className="w-5 h-5" />
                   </>
                 )}
                 <input
@@ -273,7 +273,7 @@ function BuilderPage({ params }) {
                   onChange={handleFormBannerChange}
                 />
               </div>
-              <div className="bg-white rounded flex -mt-16 z-20 gap-4 flex-grow px-16 py-8 w-8/12">
+              <div className="bg-white border border-[#efefef] rounded flex -mt-16 z-20 gap-4 flex-grow px-16 py-8 w-8/12">
                 <div className="border border-dashed boder flex justify-center items-center w-28 h-20 rounded hover:bg-slate-100 cursor-pointer border-zinc-300 relative">
                   {formIconPreview && (
                     <img
