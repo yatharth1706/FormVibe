@@ -44,7 +44,7 @@ function Sidebar() {
         isActive={path === "/app/templates"}
         link="/app/templates"
       />
-      <NavLink
+      {/* <NavLink
         iconImg="membersIcon.svg"
         linkName="Members"
         isActive={path === "/app/members"}
@@ -56,7 +56,7 @@ function Sidebar() {
         classDesc="w-7"
         isActive={path === "/app/integrations"}
         link="/app/integrations"
-      />
+      /> */}
       <NavLink
         iconImg="accountsIcon.svg"
         linkName="Account"
