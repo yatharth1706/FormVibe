@@ -10,7 +10,7 @@ function NavLink({ iconImg, linkName, classDesc, isActive, link }) {
         className={
           "p-[8px] md:p-[12px] flex gap-3 items-center hover:shadow-xl cursor-pointer hover:bg-white hover:border hover:border-zinc-200 rounded " +
           (isActive
-            ? "bg-slate-200 border border-zinc-100 font-semibold text-gray-600"
+            ? "bg-slate-100 border border-zinc-100 font-bold text-gray-600"
             : "")
         }
         title={linkName}
