@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 
 function Signup() {
-  const { signup, loginWithGithub, isLoading } = useFormVibeContext();
+  const { signup, loginWithGoogle, isLoading } = useFormVibeContext();
 
   const formInitialValues = {
     name: "",
@@ -65,7 +65,7 @@ function Signup() {
             <button
               type="button"
               className="flex items-center gap-2 justify-center btn-secondary"
-              onClick={loginWithGithub}
+              onClick={loginWithGoogle}
             >
               <img
                 className="w-4"

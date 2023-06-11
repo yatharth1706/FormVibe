@@ -44,7 +44,7 @@ export default function FormvibeContextProvider({ children }) {
     }
   };
 
-  const loginWithGithub = async () => {
+  const loginWithGoogle = async () => {
     try {
       const response = await account.createOAuth2Session(
         "google",
@@ -350,7 +350,7 @@ export default function FormvibeContextProvider({ children }) {
 
   const exposedValues = {
     login,
-    loginWithGithub,
+    loginWithGoogle,
     logout,
     signup,
     isLoading,
