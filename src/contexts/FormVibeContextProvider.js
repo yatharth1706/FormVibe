@@ -225,6 +225,27 @@ export default function FormvibeContextProvider({ children }) {
     }
   };
 
+  const deleteForm = async (id) => {
+    try {
+      const res = await databases.deleteDocument(
+        process.env.DATABASE_ID,
+        process.env.FORM_COLLECTION_ID,
+        id
+      );
+      toast("Form deleted successfully", {
+        position: "bottom-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    } catch (err) {
+      toast(err?.message ?? "Network error", {
+        position: "bottom-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    }
+  };
+
   const retrieveResponses = async (slug) => {
     try {
       const res = await databases.listDocuments(
@@ -383,6 +404,7 @@ export default function FormvibeContextProvider({ children }) {
     updateForm,
     retrieveForms,
     retrieveFormBySlug,
+    deleteForm,
     retrieveResponses,
     submitResponse,
     getLoggedInUser,

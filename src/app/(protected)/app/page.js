@@ -1,23 +1,19 @@
 "use client";
+import CreateFormDialog from "@/src/components/CreateFormDialog";
 import FormActionCard from "@/src/components/FormActionCard";
 import FormTable from "@/src/components/FormTable";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
+import { FormInput } from "lucide-react";
 import { useRouter } from "next/navigation";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/src/components/ui/dialog";
 
 import React, { useEffect, useState } from "react";
-import TemplatesModal from "@/src/components/TemplatesModal";
 
 function MyForms() {
   const [forms, setForms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isTemplatesModalOpen, setIsTemplatesModalOpen] = useState(false);
+
   const router = useRouter();
-  const { retrieveForms, createForm } = useFormVibeContext();
+  const { retrieveForms } = useFormVibeContext();
 
   useEffect(() => {
     fetchForms();
@@ -25,6 +21,7 @@ function MyForms() {
 
   const fetchForms = async () => {
     try {
+      setForms([]);
       let user =
         (typeof window !== undefined &&
           window.localStorage.getItem("FormVibeUser")) ??
@@ -42,59 +39,25 @@ function MyForms() {
     }
   };
 
-  const handleCreateForm = async () => {
-    let user =
-      (typeof window !== undefined &&
-        window.localStorage.getItem("FormVibeUser")) ??
-      "{}";
-    let userInfo = JSON.parse(user);
-
-    const res = await createForm(userInfo?.$id);
-    console.log(res);
-    router.push("/forms/" + res?.form_id);
-  };
-
   return (
     <div className="flex flex-col p-6 md:px-12 md:py-8 gap-6 flex-grow">
       <div className="flex gap-5 justify-between w-full">
-        <h4 className="font-bold">All Forms</h4>
-        <Dialog>
-          <DialogTrigger>
-            <span className="btn-primary">Create Form</span>
-          </DialogTrigger>
-          <DialogContent
-            className="bg-white overflow-y-auto"
-            style={{ maxWidth: "fit-content", overflow: "auto" }}
-          >
-            <div className="flex flex-col md:flex-row gap-8 w-full p-6 overflow-auto h-auto">
-              <FormActionCard
-                title="Create from Scratch"
-                description="Create form according to your choice by using our interactive drag and drop interface"
-                onClick={handleCreateForm}
-              />
-              <FormActionCard
-                title="Use Template"
-                description="Choose from pre defined templates to use for your form"
-                onClick={() => setIsTemplatesModalOpen(true)}
-              />
-              {/* <FormActionCard
-                title="Use AI"
-                description="Use our AI to tell your requirements and we will create form according to that"
-              /> */}
-              <TemplatesModal
-                isTemplatesModalOpen={isTemplatesModalOpen}
-                setIsTemplatesModalOpen={setIsTemplatesModalOpen}
-              />
-            </div>
-          </DialogContent>
-        </Dialog>
+        <h4 className="font-semibold text-base">Your Forms</h4>
+        <CreateFormDialog />
       </div>
 
       {isLoading && <p>Loading...</p>}
       {!isLoading && forms?.length === 0 && <p>No forms yet</p>}
+      {!isLoading && forms?.length === 0 && (
+        <div className="border border-zinc-100 mx-auto mt-12 w-[500px] h-64 bg-slate-100 rounded p-8 flex flex-col gap-5 justify-center items-center">
+          <FormInput />
+          <h2 className="text-gray-800 -mt-3">There are no forms yet</h2>
+          <CreateFormDialog />
+        </div>
+      )}
       {forms?.length > 0 && (
         <div>
-          <FormTable forms={forms} />
+          <FormTable forms={forms} fetchForms={fetchForms} />
         </div>
       )}
     </div>

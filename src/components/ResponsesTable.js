@@ -18,7 +18,11 @@ function ResponsesTable({ formResponses }) {
 
   return (
     <div className="flex gap-4 flex-col">
-      <div className="border border-zinc-300 rounded">
+      <div
+        className={
+          "border rounded" + formResponses.length > 0 ? " border-zinc-300" : ""
+        }
+      >
         <Table>
           <TableHeader>
             <TableRow>

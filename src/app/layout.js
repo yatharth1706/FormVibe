@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         className={manrope.className + " text-gray-800 text-sm bg-[#fdfdfd]"}
       >
         <FormVibeContextProvider>
-          <main>{children}</main>
+          <main className="">{children}</main>
           <ToastContainer />
         </FormVibeContextProvider>
       </body>

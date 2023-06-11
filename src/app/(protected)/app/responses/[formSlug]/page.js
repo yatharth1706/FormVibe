@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 function Responses({ params }) {
   const formSlug = params.formSlug;
-  const [response, setResponses] = useState([]);
+  const [responses, setResponses] = useState([]);
   const { retrieveResponses } = useFormVibeContext();
 
   useEffect(() => {
@@ -20,10 +20,11 @@ function Responses({ params }) {
   };
 
   return (
-    <div className="flex flex-col p-6 md:px-12 md:py-8 gap-6 w-full">
+    <div className="flex flex-col p-6 md:px-12 md:py-12 gap-6 w-full">
       <div className="flex flex-col gap-5 justify-between w-full">
         <h4 className="font-bold">All Responses</h4>
-        <ResponsesTable formResponses={response} />
+        {responses?.length === 0 && <span>No responses yet</span>}
+        <ResponsesTable formResponses={responses} />
       </div>
     </div>
   );

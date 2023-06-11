@@ -13,9 +13,17 @@ import { MoreHorizontal } from "lucide-react";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import FormsAction from "./FormsAction";
+import { useFormVibeContext } from "../contexts/FormVibeContextProvider";
 
-function FormTable({ forms }) {
+function FormTable({ forms, fetchForms }) {
   const router = useRouter();
+
+  const { deleteForm } = useFormVibeContext();
+
+  const handleDeleteForm = async (id) => {
+    await deleteForm(id);
+    await fetchForms();
+  };
 
   return (
     <div className="flex gap-4 flex-col">
@@ -45,7 +53,10 @@ function FormTable({ forms }) {
                   {moment(form?.created_on).format("YYYY-MM-DD HH:mm")}
                 </TableCell>
                 <TableCell className="text-right">
-                  <FormsAction formSlug={form?.form_id} />
+                  <FormsAction
+                    formSlug={form?.form_id}
+                    handleDeleteForm={() => handleDeleteForm(form?.$id)}
+                  />
                 </TableCell>
               </TableRow>
             ))}

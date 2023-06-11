@@ -11,7 +11,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-function FormsAction({ formSlug }) {
+function FormsAction({ formSlug, handleDeleteForm }) {
   const router = useRouter();
   return (
     <DropdownMenu>
@@ -33,9 +33,9 @@ function FormsAction({ formSlug }) {
         >
           View Responses
         </DropdownMenuItem>
-        {/* <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer" onClick={handleDeleteForm}>
           Delete Form
-        </DropdownMenuItem> */}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
