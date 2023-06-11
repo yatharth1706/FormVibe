@@ -76,7 +76,12 @@ function BuilderPage({ params }) {
   };
 
   const fetchForm = async () => {
-    const result = await retrieveFormBySlug(params?.id);
+    let userId = "";
+    if (typeof window !== undefined) {
+      userId = JSON.parse(window.localStorage.getItem("FormVibeUser") ?? "{}");
+      console.log(userId);
+    }
+    const result = await retrieveFormBySlug(params?.id, userId?.$id);
     console.log(result?.documents);
 
     if (result?.documents.length === 0) {

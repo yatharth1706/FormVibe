@@ -207,12 +207,21 @@ export default function FormvibeContextProvider({ children }) {
     }
   };
 
-  const retrieveFormBySlug = async (slug) => {
+  const retrieveFormBySlug = async (slug, createdBy = "") => {
     try {
+      let query = [];
+      if (createdBy) {
+        query = [
+          Query.equal("form_id", slug),
+          Query.equal("created_by", createdBy),
+        ];
+      } else {
+        query = [Query.equal("form_id", slug)];
+      }
       const res = await databases.listDocuments(
         process.env.DATABASE_ID,
         process.env.FORM_COLLECTION_ID,
-        [Query.equal("form_id", slug)]
+        query
       );
 
       return res;
