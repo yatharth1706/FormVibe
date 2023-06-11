@@ -63,10 +63,10 @@ function MyForms() {
             <span className="btn-primary">Create Form</span>
           </DialogTrigger>
           <DialogContent
-            className="bg-white"
-            style={{ maxWidth: "fit-content", padding: "80px" }}
+            className="bg-white overflow-y-auto"
+            style={{ maxWidth: "fit-content", overflow: "auto" }}
           >
-            <div className="flex gap-8 w-full p-6">
+            <div className="flex flex-col md:flex-row gap-8 w-full p-6 overflow-auto h-auto">
               <FormActionCard
                 title="Create from Scratch"
                 description="Create form according to your choice by using our interactive drag and drop interface"
@@ -77,10 +77,10 @@ function MyForms() {
                 description="Choose from pre defined templates to use for your form"
                 onClick={() => setIsTemplatesModalOpen(true)}
               />
-              <FormActionCard
+              {/* <FormActionCard
                 title="Use AI"
                 description="Use our AI to tell your requirements and we will create form according to that"
-              />
+              /> */}
               <TemplatesModal
                 isTemplatesModalOpen={isTemplatesModalOpen}
                 setIsTemplatesModalOpen={setIsTemplatesModalOpen}
