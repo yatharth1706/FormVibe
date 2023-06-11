@@ -5,7 +5,7 @@ import { Github } from "lucide-react";
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between  w-full gap-80 md:gap-20">
-      <div className="px-12 md:px-24 py-6 md:py-10 flex flex-col items-center justify-between w-full">
+      <div className="px-4 md:px-24 py-6 md:py-10 flex flex-col items-center justify-between w-full">
         <div className="flex justify-between items-center w-full border border-gray-200  rounded-full py-3 px-6 backdrop-filter backdrop-blur-lg bg-opacity-70 sticky top-4">
           <div>
             <img width={36} height={36} src="/assets/Icon.png" alt="App Logo" />
@@ -28,14 +28,14 @@ export default function Home() {
               Unleash the Power of Interactive Forms. Collect, Connect, and
               Collaborate
             </p>
-            <div className="flex gap-4 mt-4">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-4 w-full">
               <Link href="/signup">
-                <button className="shadow-xl w-44 flex p-3 justify-center rounded-md btn-primary text-white font-medium">
+                <button className="shadow-xl w-64 sm:w-44 flex p-3 justify-center rounded-md btn-primary text-white font-medium ">
                   Get Started
                 </button>
               </Link>
-              <Link href="/github/">
-                <button className="flex gap-1 items-center justify-center p-3 bg-white shadow-xl w-44  rounded-md btn-secondary font-medium">
+              <Link href="https://github.com/yatharth1706/FormVibe">
+                <button className="flex gap-1 items-center justify-center p-3 bg-white shadow-xl w-64 sm:w-44  rounded-md btn-secondary font-medium">
                   <Github className="w-6 h-4" />
                   <span>Star on github</span>
                 </button>
