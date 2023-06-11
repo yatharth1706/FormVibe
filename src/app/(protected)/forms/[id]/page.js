@@ -67,7 +67,11 @@ function BuilderPage({ params }) {
     };
     await updateForm(payload, formId);
     if (btnType === "save") {
-      toast("Form updated successfully.");
+      toast("Form updated successfully.", {
+        position: "bottom-right",
+        autoClose: 2000,
+        theme: "light",
+      });
     }
   };
 
@@ -76,7 +80,11 @@ function BuilderPage({ params }) {
     console.log(result?.documents);
 
     if (result?.documents.length === 0) {
-      toast("No form slug found");
+      toast("No form slug found", {
+        position: "bottom-right",
+        autoClose: 2000,
+        theme: "light",
+      });
       router.push("/app");
     }
 

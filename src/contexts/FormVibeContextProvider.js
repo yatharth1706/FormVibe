@@ -27,15 +27,15 @@ export default function FormvibeContextProvider({ children }) {
       const response = await account.createEmailSession(email, password);
 
       toast("Logged in successfully", {
-        position: "top-right",
-        autoClose: 4000,
+        position: "bottom-right",
+        autoClose: 2000,
         theme: "light",
       });
 
       router.push("/app");
     } catch (err) {
       toast(err?.message, {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -53,7 +53,7 @@ export default function FormvibeContextProvider({ children }) {
       );
     } catch (err) {
       toast(err?.message ?? "Network Error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -64,7 +64,7 @@ export default function FormvibeContextProvider({ children }) {
     try {
       const response = await account.deleteSession("current");
       toast("Logged out successfully", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -74,7 +74,7 @@ export default function FormvibeContextProvider({ children }) {
       }
     } catch (err) {
       toast(err?.message ?? "Network Error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -89,14 +89,14 @@ export default function FormvibeContextProvider({ children }) {
       const user_creation_response = await createUser(result?.$id, name, email);
 
       toast("User account created successfully", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
       router.push("/login");
     } catch (err) {
       toast(err?.message ?? "Network Error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -165,7 +165,7 @@ export default function FormvibeContextProvider({ children }) {
       return res;
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -182,7 +182,7 @@ export default function FormvibeContextProvider({ children }) {
       );
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -200,7 +200,7 @@ export default function FormvibeContextProvider({ children }) {
       return res;
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -218,7 +218,7 @@ export default function FormvibeContextProvider({ children }) {
       return res;
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -236,7 +236,7 @@ export default function FormvibeContextProvider({ children }) {
       return res;
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -256,7 +256,7 @@ export default function FormvibeContextProvider({ children }) {
       );
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -274,7 +274,7 @@ export default function FormvibeContextProvider({ children }) {
       return res?.$id;
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -287,7 +287,7 @@ export default function FormvibeContextProvider({ children }) {
       return res?.href;
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -300,7 +300,7 @@ export default function FormvibeContextProvider({ children }) {
       return res?.href;
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -318,7 +318,7 @@ export default function FormvibeContextProvider({ children }) {
       return res;
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -341,7 +341,7 @@ export default function FormvibeContextProvider({ children }) {
       );
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
@@ -358,13 +358,13 @@ export default function FormvibeContextProvider({ children }) {
         payload
       );
       toast("User account updated successfully", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });
     } catch (err) {
       toast(err?.message ?? "Network error", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 4000,
         theme: "light",
       });

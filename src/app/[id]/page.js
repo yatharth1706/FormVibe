@@ -35,7 +35,11 @@ function FormPage({ params }) {
     console.log(result?.documents);
 
     if (result?.documents.length === 0) {
-      toast("No form slug found");
+      toast("No form slug found", {
+        position: "bottom-right",
+        autoClose: 2000,
+        theme: "light",
+      });
       router.push("/app");
     }
 
@@ -114,11 +118,20 @@ function FormPage({ params }) {
     const isValid = validateBeforeSubmit();
     if (isValid) {
       const res = await submitResponse(params?.id, formElements);
-      toast("Response submitted successfully");
+      toast("Response submitted successfully", {
+        position: "bottom-right",
+        autoClose: 2000,
+        theme: "light",
+      });
       setFormSubmittedSuccessfully(true);
     } else {
       toast(
-        "Some values have been left empty. Please find errors attached with input"
+        "Some values have been left empty. Please find errors attached with input",
+        {
+          position: "bottom-right",
+          autoClose: 2000,
+          theme: "light",
+        }
       );
     }
   };
