@@ -55,19 +55,7 @@ function Login() {
             >
               {isLoading ? "Logging in" : "Login"}
             </button>
-            <p className="font-light text-center">Or</p>
-            <button
-              type="button"
-              className="flex items-center gap-2 justify-center btn-secondary"
-              onClick={loginWithGoogle}
-            >
-              <img
-                className="w-4"
-                src="/assets/GoogleLogo.png"
-                alt="google logo"
-              />{" "}
-              Log in with Google
-            </button>
+
             <p className="text-center font-light text-gray-700 mt-1">
               Don&apos;t have an account.{" "}
               <Link href="/signup">

@@ -86,6 +86,8 @@ export default function FormvibeContextProvider({ children }) {
       setIsLoading(true);
       const result = await account.create(ID.unique(), email, password, name);
 
+      const user_creation_response = await createUser(result?.$id, name, email);
+
       toast("User account created successfully", {
         position: "top-right",
         autoClose: 4000,
@@ -314,6 +316,29 @@ export default function FormvibeContextProvider({ children }) {
       );
 
       return res;
+    } catch (err) {
+      toast(err?.message ?? "Network error", {
+        position: "top-right",
+        autoClose: 4000,
+        theme: "light",
+      });
+    }
+  };
+
+  const createUser = async (userId, name, email) => {
+    try {
+      const res = await databases.createDocument(
+        process.env.DATABASE_ID,
+        process.env.USER_COLLECTION_ID,
+        ID.unique(),
+        {
+          id: userId,
+          name: name,
+          email: email,
+          profile_pic: "",
+          created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
+        }
+      );
     } catch (err) {
       toast(err?.message ?? "Network error", {
         position: "top-right",

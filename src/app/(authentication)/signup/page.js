@@ -61,19 +61,7 @@ function Signup() {
             <button type="submit" className="btn-primary mt-4">
               Sign up
             </button>
-            <p className="font-light text-center">Or</p>
-            <button
-              type="button"
-              className="flex items-center gap-2 justify-center btn-secondary"
-              onClick={loginWithGoogle}
-            >
-              <img
-                className="w-4"
-                src="/assets/GoogleLogo.png"
-                alt="google logo"
-              />
-              Sign up with Google
-            </button>
+
             <p className="text-center font-light text-gray-700 mt-1">
               Already have an account?{" "}
               <Link href="/login">
