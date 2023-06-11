@@ -3,15 +3,24 @@
 import React, { useEffect } from "react";
 import { Formik, useFormik } from "formik";
 import Link from "next/link";
+import * as Yup from "yup";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 
 function Login() {
-  const { loginWithGoogle, login, isLoading } = useFormVibeContext();
+  const { loginWithGoogle, login } = useFormVibeContext();
 
   const formInitialValues = {
     email: "",
     password: "",
   };
+
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Required"),
+    password: Yup.string()
+      .min(6, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+  });
 
   const formSubmit = async (values) => {
     await login(values.email, values.password);
@@ -19,7 +28,11 @@ function Login() {
 
   return (
     <div className="max-w-xl mx-auto h-screen flex justify-center items-center">
-      <Formik initialValues={formInitialValues} onSubmit={formSubmit}>
+      <Formik
+        initialValues={formInitialValues}
+        onSubmit={formSubmit}
+        validationSchema={LoginSchema}
+      >
         {(formik) => (
           <form
             className="text-sm bg-white shadow border border-zinc-200 rounded-lg flex flex-col gap-3 p-12 w-full"
@@ -40,6 +53,11 @@ function Login() {
               className="border-zinc-300 border px-4 py-2 outline-sky-300 rounded-md"
               {...formik.getFieldProps("email")}
             />
+            {formik.errors.email && formik.touched.email ? (
+              <div className="flex justify-end -mt-1 text-xs text-red-600">
+                {formik.errors.email}
+              </div>
+            ) : null}
             <label htmlFor="password">Password</label>
             <input
               id="password"
@@ -48,12 +66,13 @@ function Login() {
               className="border-zinc-300 border px-4 py-2 outline-sky-300 rounded-md"
               {...formik.getFieldProps("password")}
             />
-            <button
-              type="submit"
-              className="btn-primary mt-4"
-              disabled={isLoading}
-            >
-              {isLoading ? "Logging in" : "Login"}
+            {formik.errors.password && formik.touched.password ? (
+              <div className="flex justify-end -mt-1 text-xs text-red-600">
+                {formik.errors.password}
+              </div>
+            ) : null}
+            <button type="submit" className="btn-primary mt-4">
+              Login
             </button>
 
             <p className="text-center font-light text-gray-700 mt-1">

@@ -5,6 +5,7 @@ import { renderFinalFormElements } from "@/src/lib/renderHelpers";
 import { toast } from "react-toastify";
 import FullPageLoading from "@/src/components/FullPageLoading";
 import Link from "next/link";
+import TypeForm from "@/src/components/TypeForm";
 
 function FormPage({ params }) {
   const [isFetchingForm, setIsFetchingForm] = useState(true);
@@ -12,6 +13,7 @@ function FormPage({ params }) {
   const [formBannerPreview, setFormBannerPreview] = useState("");
   const [formIconPreview, setFormIconPreview] = useState("");
   const [formName, setFormName] = useState("");
+  const [formType, setFormType] = useState("");
   const [formDescription, setFormDescription] = useState("");
   const [formId, setFormId] = useState();
   const [formSubmittedSuccessfully, setFormSubmittedSuccessfully] =
@@ -44,6 +46,7 @@ function FormPage({ params }) {
     console.log(cols);
     setFormElements(cols);
     setFormId(doc?.$id);
+    setFormType(doc?.form_type);
 
     if (doc?.form_banner) {
       const bannerPreview = await getFilePreview(doc?.form_banner);
@@ -153,70 +156,75 @@ function FormPage({ params }) {
         </div>
       ) : (
         <>
-          <div className="flex h-64 flex-col gap-2 justify-center items-center w-full bg-sky-200 border border-zinc-200 border-dashed relative">
-            {formBannerPreview && (
-              <img
-                src={formBannerPreview}
-                className="w-full h-full object-cover"
-              />
-            )}
-          </div>
-          <div className="bg-white border border-zinc-200 z-20 -mt-40 flex flex-col gap-14 w-8/12 p-20 rounded mx-auto">
-            <div className="flex w-full gap-6">
-              {formIconPreview && (
-                <div className="flex justify-center items-center w-28 h-20 rounded hover:bg-slate-100 cursor-pointer border-zinc-300 relative">
-                  <img src={formIconPreview} alt="Form Icon Image" />
-                </div>
-              )}
-              <div className="flex flex-col flex-grow">
-                <input
-                  type="text"
-                  value={formName}
-                  placeholder=""
-                  onChange={(e) => {
-                    setFormName(e.target.value);
-                    setInitialRender(false);
-                  }}
-                  className="outline-none py-2 font-semibold text-gray-600 text-3xl"
-                />
-
-                {formDescription && (
-                  <input
-                    type="text"
-                    value={formDescription}
-                    placeholder=""
-                    onChange={(e) => {
-                      setFormDescription(e.target.value);
-                      setInitialRender(false);
-                    }}
-                    className="text-gray-500 w-full outline-none py-2"
+          {formType === "Airtable" ? (
+            <>
+              <div className="flex h-64 flex-col gap-2 justify-center items-center w-full bg-sky-200 border border-zinc-200 border-dashed relative">
+                {formBannerPreview && (
+                  <img
+                    src={formBannerPreview}
+                    className="w-full h-full object-cover"
                   />
                 )}
               </div>
-            </div>
+              <div className="bg-white border border-zinc-200 z-20 -mt-40 flex flex-col gap-14 w-8/12 p-20 rounded mx-auto">
+                <div className="flex w-full gap-6">
+                  {formIconPreview && (
+                    <div className="flex justify-center items-center w-28 h-20 rounded hover:bg-slate-100 cursor-pointer border-zinc-300 relative">
+                      <img src={formIconPreview} alt="Form Icon Image" />
+                    </div>
+                  )}
+                  <div className="flex flex-col flex-grow">
+                    <h2 className="outline-none py-2 font-semibold text-gray-600 text-3xl">
+                      {formName}
+                    </h2>
 
-            {formElements.map((el, index) =>
-              renderFinalFormElements(
-                index,
-                el?.name,
-                el?.label,
-                el?.value,
-                (event = {}, val = "") =>
-                  handleFormElementValueChange(index, event, val),
-                el?.optionsList ?? [],
-                el?.isItYes ?? "",
-                (val) => handleYesNo(index, val),
-                (e) => handleFileChange(e, index),
-                el?.fileName ?? "",
-                el?.errorMessage ?? ""
-              )
-            )}
-            <div className="flex justify-center">
-              <button className="btn-primary w-full p-3" onClick={handleSubmit}>
-                Submit
-              </button>
-            </div>
-          </div>
+                    {formDescription && (
+                      <p className="text-gray-500 w-full outline-none py-2">
+                        {formDescription}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {formElements.map((el, index) =>
+                  renderFinalFormElements(
+                    index,
+                    el?.name,
+                    el?.label,
+                    el?.value,
+                    (event = {}, val = "") =>
+                      handleFormElementValueChange(index, event, val),
+                    el?.optionsList ?? [],
+                    el?.isItYes ?? "",
+                    (val) => handleYesNo(index, val),
+                    (e) => handleFileChange(e, index),
+                    el?.fileName ?? "",
+                    el?.errorMessage ?? ""
+                  )
+                )}
+                <div className="flex justify-center">
+                  <button
+                    className="btn-primary w-full p-3"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <TypeForm
+              formBannerPreview={formBannerPreview}
+              formDescription={formDescription}
+              formName={formName}
+              formIconPreview={formIconPreview}
+              formElements={formElements}
+              handleFileChange={handleFileChange}
+              handleFormElementValueChange={handleFormElementValueChange}
+              handleYesNo={handleYesNo}
+              handleSubmit={handleSubmit}
+            />
+          )}
         </>
       )}
 

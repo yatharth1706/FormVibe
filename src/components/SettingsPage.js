@@ -91,7 +91,10 @@ export default function SettingsPage({
       <select
         className="p-3 rounded bg-white border border-gray-200 outline-sky-400"
         value={formType}
-        onChange={(e) => setFormType(e.target.value)}
+        onChange={(e) => {
+          setInitialRender(false);
+          setFormType(e.target.value);
+        }}
       >
         <option>Airtable</option>
         <option>Typeform</option>

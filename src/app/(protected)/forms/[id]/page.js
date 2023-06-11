@@ -33,7 +33,7 @@ function BuilderPage({ params }) {
   }, []);
 
   useEffect(() => {
-    console.log(formElements);
+    console.log(formElements, formId, initialRender);
     if (formId && !initialRender) {
       if (timer) {
         clearTimeout(timer);

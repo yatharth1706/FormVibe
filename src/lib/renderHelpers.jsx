@@ -26,7 +26,7 @@ export function renderFinalFormElements(
           }}
         >
           <label className="text-gray-700 text-lg font-semibold outline-none">
-            {label}
+            {(index + 1).toString() + ". " + label}
           </label>
           <input
             type="text"
@@ -50,7 +50,7 @@ export function renderFinalFormElements(
           }}
         >
           <label className="text-gray-700 text-lg font-semibold outline-none">
-            {label}
+            {(index + 1).toString() + ". " + label}
           </label>
           <div className="relative h-44 w-full border border-zinc-200 rounded p-8 flex flex-col gap-3 justify-center items-center bg-slate-100 hover:bg-slate-200">
             {fileName ? (
@@ -82,7 +82,7 @@ export function renderFinalFormElements(
           }}
         >
           <label className="text-gray-700 text-lg font-semibold outline-none">
-            {label}
+            {(index + 1).toString() + ". " + label}
           </label>
           <input
             type="date"
@@ -106,7 +106,7 @@ export function renderFinalFormElements(
           }}
         >
           <label className="text-gray-700 text-lg font-semibold outline-none">
-            {label}
+            {(index + 1).toString() + ". " + label}
           </label>
           <PhoneInput
             country={"in"} // Set the default country
@@ -131,7 +131,7 @@ export function renderFinalFormElements(
           }}
         >
           <label className="text-gray-700 text-lg font-semibold outline-none">
-            {label}
+            {(index + 1).toString() + ". " + label}
           </label>
           <textarea
             className="border border-zinc-200 rounded p-2 h-32 resize-none"
@@ -157,7 +157,7 @@ export function renderFinalFormElements(
             className="text-gray-700 text-lg font-semibold outline-none"
             for={label}
           >
-            {label}
+            {(index + 1).toString() + ". " + label}
           </label>
           {(optionsList ?? []).map((opt, index) => (
             <div
@@ -192,7 +192,7 @@ export function renderFinalFormElements(
           }}
         >
           <label className="text-gray-700 text-lg font-semibold outline-none">
-            {label}
+            {(index + 1).toString() + ". " + label}
           </label>
           <div
             className={
