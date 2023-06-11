@@ -5,7 +5,6 @@ import { Manrope } from "next/font/google";
 import FormVibeContextProvider from "@/src/contexts/FormVibeContextProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const manrope = Manrope({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {

@@ -1,13 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, useFormik } from "formik";
 import Link from "next/link";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 import * as Yup from "yup";
+import { usePathname, useRouter } from "next/navigation";
 
 function Signup() {
   const { signup } = useFormVibeContext();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (
+      typeof window !== undefined &&
+      (pathname === "/login" || pathname === "/signup")
+    ) {
+      const user = window.localStorage.getItem("FormVibeUser");
+      if (user) {
+        router.push("/app");
+      }
+    }
+  }, []);
 
   const formInitialValues = {
     name: "",
@@ -44,13 +59,19 @@ function Signup() {
             className="text-sm bg-white shadow border border-zinc-200 rounded-lg flex flex-col gap-3 p-12 w-full"
             onSubmit={formik.handleSubmit}
           >
-            <div className="flex gap-3 items-center">
-              <img className="w-8" src="/assets/Icon.png" alt="Icon" />
-              <span className="text-lg font-medium">Create a new account</span>
-            </div>
-            <p className="font-light text-sm mb-4">
-              Enter following details to create a new account in formvibe
-            </p>
+            <Link href="/">
+              <div className="flex gap-3 items-center cursor-pointer">
+                <img className="w-12" src="/assets/Icon.png" alt="Icon" />
+                <div className="flex flex-col pt-3">
+                  <span className="text-lg font-medium">
+                    Create a new account
+                  </span>
+                  <p className="font-normal text-xs mb-4 text-gray-600">
+                    Enter following details to create your account in formvibe
+                  </p>
+                </div>
+              </div>
+            </Link>
             <label htmlFor="name">Full Name</label>
             <input
               id="name"

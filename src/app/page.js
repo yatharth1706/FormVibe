@@ -19,7 +19,7 @@ export default function Home() {
             Unleash the Power of Interactive Forms. Collect, Connect, and
             Collaborate
           </p>
-          <Link href="/login">
+          <Link href="/signup">
             <button className="mt-4 bg-white shadow-xl w-44 p-3 rounded-md bg-gradient-to-br from-[#0277FF] via-[#0077ffc6] to-[#0075FF] text-white font-medium">
               Get Started
             </button>

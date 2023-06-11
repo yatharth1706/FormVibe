@@ -47,7 +47,6 @@ function MyForms() {
       </div>
 
       {isLoading && <p>Loading...</p>}
-      {!isLoading && forms?.length === 0 && <p>No forms yet</p>}
       {!isLoading && forms?.length === 0 && (
         <div className="border border-zinc-100 mx-auto mt-12 w-[500px] h-64 bg-slate-100 rounded p-8 flex flex-col gap-5 justify-center items-center">
           <FormInput />

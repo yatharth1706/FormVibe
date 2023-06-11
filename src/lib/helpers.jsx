@@ -24,8 +24,8 @@ export function renderFormElement(
         <div
           key={index.toString() + name}
           className={
-            "flex flex-col gap-6 w-full rounded p-8  hover:shadow border border-zinc-200 cursor-pointer hover:border-green-400 " +
-            (isActive ? " border-sky-400" : "")
+            "flex flex-col gap-6 w-full rounded p-8  hover:shadow border cursor-pointer hover:border-green-400 " +
+            (isActive ? " border-sky-400" : " border-zinc-200")
           }
           style={{
             position: "relative",
@@ -57,8 +57,8 @@ export function renderFormElement(
         <div
           key={index.toString() + name}
           className={
-            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
-            (isActive === true ? "border border-sky-400 " : "")
+            "flex flex-col gap-6 w-full p-8 border hover:border-green-400 " +
+            (isActive === true ? "border border-sky-400 " : " border-zinc-200")
           }
           style={{
             position: "relative",
@@ -89,8 +89,8 @@ export function renderFormElement(
         <div
           key={index.toString() + name}
           className={
-            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
-            (isActive ? "border-sky-400" : "")
+            "flex flex-col gap-6 w-full p-8 border hover:border-green-400 " +
+            (isActive ? "border-sky-400" : " border-zinc-200")
           }
           style={{
             position: "relative",
@@ -122,8 +122,8 @@ export function renderFormElement(
         <div
           key={index.toString() + name}
           className={
-            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
-            (isActive ? "border-sky-400" : "")
+            "flex flex-col gap-6 w-full p-8 border  hover:border-green-400 " +
+            (isActive ? "border-sky-400" : " border-zinc-200")
           }
           style={{
             position: "relative",
@@ -156,8 +156,8 @@ export function renderFormElement(
         <div
           key={index.toString() + name}
           className={
-            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
-            (isActive ? "border-sky-400" : "")
+            "flex flex-col gap-6 w-full p-8 border  hover:border-green-400 " +
+            (isActive ? "border-sky-400" : " border-zinc-200")
           }
           style={{
             position: "relative",
@@ -188,8 +188,8 @@ export function renderFormElement(
         <div
           key={index.toString() + name}
           className={
-            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
-            (isActive ? "border-sky-400" : "")
+            "flex flex-col gap-6 w-full p-8 border hover:border-green-400 " +
+            (isActive ? "border-sky-400" : " border-zinc-200")
           }
           style={{
             position: "relative",
@@ -239,8 +239,8 @@ export function renderFormElement(
         <div
           key={index.toString() + name}
           className={
-            "flex flex-col gap-6 w-full p-8 border border-zinc-200 hover:border-green-400 " +
-            (isActive ? "border-sky-400" : "")
+            "flex flex-col gap-6 w-full p-8 border hover:border-green-400 " +
+            (isActive ? "border-sky-400" : " border-zinc-200")
           }
           style={{
             position: "relative",
