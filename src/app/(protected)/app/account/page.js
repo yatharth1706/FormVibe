@@ -75,11 +75,11 @@ function MyAccount() {
   };
 
   return (
-    <div className="flex flex-col px-12 py-12 gap-6 w-full">
+    <div className="flex flex-col p-6 md:p-12 gap-6 w-full">
       <h1>My Account</h1>
 
-      <div className="w-full h-96 border border-zinc-200 rounded p-12">
-        <div className="flex gap-24">
+      <div className="w-full h-auto md:h-96 border border-zinc-200 rounded p-12">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-24">
           <div className="relative cursor-pointer hover:bg-slate-200 rounded-full h-44 w-44 border border-zinc-300 flex justify-center items-center">
             {profilePicPreview && (
               <img
@@ -116,7 +116,7 @@ function MyAccount() {
                 disabled
               />
             </div>
-            <div className="flex gap-4 ml-auto">
+            <div className="flex w-full gap-4 ml-auto">
               <button className=" w-44 btn-secondary bg-gray-800 text-white">
                 Delete Account
               </button>

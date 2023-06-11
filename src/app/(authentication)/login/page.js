@@ -27,7 +27,7 @@ function Login() {
   };
 
   return (
-    <div className="max-w-xl mx-auto h-screen flex justify-center items-center">
+    <div className="w-[95%] md:max-w-xl mx-auto h-screen flex justify-center items-center">
       <Formik
         initialValues={formInitialValues}
         onSubmit={formSubmit}

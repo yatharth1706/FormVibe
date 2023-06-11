@@ -13,7 +13,7 @@ export default function BuilderFormNav({
       <img
         src="/assets/icons/backIcon.svg"
         alt="Back Icon"
-        onClick={() => router.back()}
+        onClick={() => router.push("/app")}
         className="cursor-pointer"
       />
 

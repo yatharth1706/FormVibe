@@ -35,7 +35,7 @@ function NavigationBar() {
 
   return (
     <div className="flex justify-between w-full h-16 px-8 py-4 border-b border-zinc-300">
-      <Link href="/">
+      <Link href="/app">
         <div className="flex gap-4 items-center cursor-pointer">
           <img src="/assets/Icon.png" width={32} alt="App Logo" />
           <span>FormVibe</span>

@@ -35,7 +35,7 @@ function TypeForm({
               />
             )}
           </div>
-          <div className="flex w-10/12 mx-auto gap-6 mt-10 p-8 items-center">
+          <div className="flex w-[95%] md:w-10/12 mx-auto gap-6 mt-10 p-8 items-center">
             {formIconPreview && (
               <div className="flex justify-center items-center w-16 h-16 rounded hover:bg-slate-100 cursor-pointer border-zinc-300 relative">
                 <img
@@ -61,7 +61,7 @@ function TypeForm({
       )}
       <div
         className={
-          "w-10/12 mx-auto p-8 flex flex-col gap-3 items-center justify-center " +
+          "w-[95%] md:w-10/12 mx-auto p-8 flex flex-col gap-3 items-center justify-center " +
           (index > 0 ? "h-full" : "")
         }
       >
@@ -79,7 +79,7 @@ function TypeForm({
           formElements[index]?.fileName ?? "",
           formElements[index]?.errorMessage ?? ""
         )}
-        <div className="w-full relative">
+        <div className="w-full relative pb-24">
           <div className="flex gap-4 rounded absolute left-0 top-3">
             {index > 0 && (
               <div

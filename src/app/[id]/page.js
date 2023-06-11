@@ -166,11 +166,15 @@ function FormPage({ params }) {
                   />
                 )}
               </div>
-              <div className="bg-white border border-zinc-200 z-20 -mt-40 flex flex-col gap-14 w-8/12 p-20 rounded mx-auto">
+              <div className="bg-white border border-zinc-200 z-20 -mt-40 flex flex-col gap-14 w-[95%] md:w-8/12 p-8 md:p-20 rounded mx-auto">
                 <div className="flex w-full gap-6">
                   {formIconPreview && (
                     <div className="flex justify-center items-center w-28 h-20 rounded hover:bg-slate-100 cursor-pointer border-zinc-300 relative">
-                      <img src={formIconPreview} alt="Form Icon Image" />
+                      <img
+                        src={formIconPreview}
+                        className="w-full h-full object-contain"
+                        alt="Form Icon Image"
+                      />
                     </div>
                   )}
                   <div className="flex flex-col flex-grow">

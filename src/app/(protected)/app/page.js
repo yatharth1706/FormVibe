@@ -55,7 +55,7 @@ function MyForms() {
   };
 
   return (
-    <div className="flex flex-col px-12 py-8 gap-6 w-full">
+    <div className="flex flex-col p-6 md:px-12 md:py-8 gap-6 flex-grow">
       <div className="flex gap-5 justify-between w-full">
         <h4 className="font-bold">All Forms</h4>
         <Dialog>

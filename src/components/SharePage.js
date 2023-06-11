@@ -53,7 +53,7 @@ export default function SharePage({ params }) {
 
   return (
     <div className="flex flex-col gap-8 w-11/12 mx-auto p-8">
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4">
         {" "}
         <h2 className="font-semibold">Link</h2>
         <div className="p-3 flex items-center bg-gray-100">
@@ -81,7 +81,7 @@ export default function SharePage({ params }) {
           </Link>
         </div>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-5">
         <h2 className="font-semibold">Share on your social platform</h2>
         <div className="flex gap-5">
           <Twitter

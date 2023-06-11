@@ -8,11 +8,12 @@ function NavLink({ iconImg, linkName, classDesc, isActive, link }) {
     <Link href={link}>
       <div
         className={
-          "p-[12px] flex gap-3 items-center hover:shadow-xl cursor-pointer hover:bg-white hover:border hover:border-zinc-200 rounded " +
+          "p-[8px] md:p-[12px] flex gap-3 items-center hover:shadow-xl cursor-pointer hover:bg-white hover:border hover:border-zinc-200 rounded " +
           (isActive
             ? "bg-slate-200 border border-zinc-100 font-semibold text-gray-600"
             : "")
         }
+        title={linkName}
       >
         <div className="w-8">
           <img
@@ -21,7 +22,7 @@ function NavLink({ iconImg, linkName, classDesc, isActive, link }) {
             alt="Form Icon"
           />
         </div>
-        {linkName}
+        <span className="hidden md:block">{linkName}</span>
       </div>
     </Link>
   );
@@ -31,7 +32,7 @@ function Sidebar() {
   const path = usePathname();
   console.log(path);
   return (
-    <div className="py-8 px-8 w-2/12 border-r border-zinc-300 flex flex-col gap-5 h-screen">
+    <div className="md:py-8 md:px-8 md:w-2/12 border-r border-zinc-300 flex flex-col gap-5 h-screen">
       <NavLink
         iconImg="formIcon.svg"
         linkName="My Forms"

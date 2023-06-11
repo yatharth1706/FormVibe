@@ -139,6 +139,15 @@ function BuilderPage({ params }) {
 
   return (
     <div className="flex flex-col h-full w-full">
+      <div
+        className="absolute md:hidden h-screen w-full bg-white z-auto top-0 flex flex-col justify-center items-center p-10"
+        style={{ zIndex: 1 }}
+      >
+        <span className="text-center">
+          Use the builder in big screen sizes. It does not work well in small
+          screen sizes
+        </span>
+      </div>
       <BuilderFormNav
         formSlug={formSlug}
         tab={tab}

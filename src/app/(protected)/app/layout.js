@@ -28,7 +28,7 @@ export default function AccountsLayout({ children }) {
       <NavigationBar />
       <div className="flex w-full">
         <Sidebar />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 w-8/12">{children}</div>
       </div>
     </div>
   );

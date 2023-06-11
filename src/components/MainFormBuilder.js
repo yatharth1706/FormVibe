@@ -156,7 +156,7 @@ export default function MainFormBuilder({
             </div>
           )}
           {currActiveFormElement >= 0 && (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center mt-3 gap-4">
               <span>Is Required</span>
 
               <Switch
