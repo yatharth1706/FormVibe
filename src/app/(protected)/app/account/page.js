@@ -117,9 +117,9 @@ function MyAccount() {
               />
             </div>
             <div className="flex w-full gap-4 ml-auto">
-              <button className=" w-44 btn-secondary bg-gray-800 text-white">
+              {/* <button className=" w-44 btn-secondary bg-gray-800 text-white">
                 Delete Account
-              </button>
+              </button> */}
               <button
                 className="w-44 btn-primary"
                 type="button"

@@ -33,9 +33,9 @@ function FormsAction({ formSlug }) {
         >
           View Responses
         </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">
+        {/* <DropdownMenuItem className="cursor-pointer">
           Delete Form
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
