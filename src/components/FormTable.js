@@ -27,10 +27,10 @@ function FormTable({ forms, fetchForms }) {
 
   return (
     <div className="flex gap-4 flex-col">
-      <div className="border border-zinc-300 rounded">
+      <div className="border border-zinc-300 rounded-lg p-[1px]">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-muted/50">
               <TableHead>Form Name</TableHead>
               <TableHead>Form Type</TableHead>
               <TableHead>Form Description</TableHead>

@@ -119,16 +119,16 @@ function FormTemplates() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-4">
       <div
-        className="relative w-full h-72 border border-zinc-200 rounded p-12 flex flex-col gap-3 justify-center items-center cursor-pointer bg-slate-100 hover:bg-slate-200"
+        className="relative w-full h-72 border border-zinc-200 rounded-lg p-12 flex flex-col gap-3 justify-center items-center cursor-pointer bg-slate-100 hover:bg-slate-200"
         onClick={() => createFormFromTemplate("job")}
       >
         <AppWindow />
         <span>Job Application Form</span>
       </div>
       <div
-        className="relative w-full h-72 border border-zinc-200 rounded p-12 flex flex-col gap-3 justify-center items-center cursor-pointer bg-slate-100 hover:bg-slate-200"
+        className="relative w-full h-72 border border-zinc-200 rounded-lg p-12 flex flex-col gap-3 justify-center items-center cursor-pointer bg-slate-100 hover:bg-slate-200"
         onClick={() => createFormFromTemplate("survey")}
       >
         <Book />

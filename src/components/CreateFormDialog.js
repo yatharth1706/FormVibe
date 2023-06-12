@@ -8,10 +8,13 @@ import TemplatesModal from "./TemplatesModal";
 import FormActionCard from "./FormActionCard";
 import { useState } from "react";
 import { useFormVibeContext } from "../contexts/FormVibeContextProvider";
+import { PlusIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function CreateFormDialog() {
   const [isTemplatesModalOpen, setIsTemplatesModalOpen] = useState(false);
   const { createForm } = useFormVibeContext();
+  const router = useRouter();
 
   const handleCreateForm = async () => {
     let user =
@@ -28,7 +31,9 @@ export default function CreateFormDialog() {
   return (
     <Dialog>
       <DialogTrigger>
-        <span className="btn-primary">Create Form</span>
+        <span className="btn-primary flex items-center gap-2">
+          <PlusIcon className="w-5 h-5" /> Create Form
+        </span>
       </DialogTrigger>
       <DialogContent
         className="bg-white overflow-y-auto"

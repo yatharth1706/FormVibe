@@ -42,7 +42,10 @@ function MyForms() {
   return (
     <div className="flex flex-col p-6 md:px-12 md:py-8 gap-6 flex-grow">
       <div className="flex gap-5 justify-between w-full">
-        <h4 className="font-semibold text-base">Your Forms</h4>
+        <div className="flex flex-col gap-2">
+          <h4 className="font-semibold text-lg">Your Forms</h4>
+          <p className="text-gray-500">View and manage your forms</p>
+        </div>
         <CreateFormDialog />
       </div>
 
