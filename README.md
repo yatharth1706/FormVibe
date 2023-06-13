@@ -1,12 +1,8 @@
-<p align="center">
-  <img src="https://github.com/yatharth1706/FormVibe/assets/32243289/c38d33db-fd32-44cb-86e4-ea9853367c1f" width = "60" height = "60" alt="Logo" />
-</p>
+![OgImage](https://github.com/yatharth1706/FormVibe/assets/32243289/de9f26d1-5caa-43d9-ae25-b8d217f73d13)
 
 ## Form Vibe - Create Forms With Ease
 Interactive form desginer tool. Alternative of typeform and airtable, with interactive user interface to design forms and share them with users.
 Provides built in drag and drop feature in the form builder which users can use to build forms in easy way and customize accordingly.
-
-![OgImage](https://github.com/yatharth1706/FormVibe/assets/32243289/de9f26d1-5caa-43d9-ae25-b8d217f73d13)
 
 ## Demo Video
 https://youtu.be/FRMfz-3pbi0
