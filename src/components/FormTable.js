@@ -30,7 +30,7 @@ function FormTable({ forms, fetchForms }) {
       <div className="border border-zinc-300 rounded-lg p-[1px]">
         <Table>
           <TableHeader>
-            <TableRow className="bg-muted/50">
+            <TableRow className="bg-muted/50 font-bold">
               <TableHead>Form Name</TableHead>
               <TableHead>Form Type</TableHead>
               <TableHead>Form Description</TableHead>

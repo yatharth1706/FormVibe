@@ -46,9 +46,14 @@ function NavigationBar() {
   return (
     <div className="flex justify-between w-full h-16 px-8 py-4 border-b border-zinc-300">
       <Link href="/app">
-        <div className="flex gap-4 items-center cursor-pointer">
-          <img src="/assets/Icon.png" width={32} alt="App Logo" />
-          <span>FormVibe</span>
+        <div className="font-extrabold text-2xl flex items-center gap-1">
+          <div>
+            <img width={36} height={36} src="/assets/Icon.png" alt="App Logo" />
+          </div>
+          <span className="ml-2 bg-gradient-radial bg-gray-700  bg-clip-text text-transparent">
+            Form{" "}
+          </span>
+          <img src="/assets/Vibe.png" alt="Vibe text" className="w-16" />
         </div>
       </Link>
       <div>

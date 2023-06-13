@@ -16,16 +16,12 @@ function ResponsesTable({ formResponses }) {
   );
   const labels = single_response?.map((item) => item?.label) ?? [];
 
-  return (
-    <div className="flex gap-4 flex-col">
-      <div
-        className={
-          "border rounded" + formResponses.length > 0 ? " border-zinc-300" : ""
-        }
-      >
+  return formResponses.length > 0 ? (
+    <div className="flex gap-4 flex-col border border-zinc-300 rounded-lg p-[1px]">
+      <div className={"border rounded" + formResponses.length > 0 ? " " : ""}>
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-muted/50 font-bold">
               {labels?.map((label, index) => (
                 <TableHead key={label + String(index)}>{label}</TableHead>
               ))}
@@ -45,6 +41,8 @@ function ResponsesTable({ formResponses }) {
         </Table>
       </div>
     </div>
+  ) : (
+    <></>
   );
 }
 
