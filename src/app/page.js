@@ -54,8 +54,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full h-auto flex flex-col items-center pt-20 gap-20">
-        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-20">
+      <div className="w-full h-auto flex flex-col items-center pt-20 gap-8 sm:gap-20">
+        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-8 md:gap-20">
           <div className="flex flex-col w-full md:w-4/12 p-6 justify-center gap-5">
             <div className="flex gap-4 items-center">
               <Grip />
@@ -78,8 +78,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-20">
-          <div className="flex flex-col w-full md:w-8/12 gap-10">
+        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-8 md:gap-20">
+          <div className="flex flex-col w-full md:w-8/12 gap-10 order-2 md:order-none">
             <div className=" w-full mx-auto rounded-xl p-1 gap-5">
               <div className="flex p-4 justify-center w-full rounded-xl rotate-1 bg-gradient-to-r from-[#6776FF] via-[#87c9f8] to-[#ceeaff] h-auto">
                 <img
@@ -97,8 +97,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-full md:w-4/12 justify-center gap-5 p-6">
-            <div className="flex gap-4 items-center">
+          <div className="flex flex-col w-full md:w-4/12 justify-center gap-5 p-6 order-1 md:order-none">
+            <div className="flex gap-4 items-center ">
               <LayoutList />
               <h3 className="text-2xl font-bold">Form Types</h3>
             </div>
@@ -109,7 +109,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-20">
+        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-8 md:gap-20">
           <div className="flex flex-col w-full md:w-4/12 p-6 justify-center gap-5">
             <div className="flex gap-4 items-center">
               <BookTemplate />
@@ -133,8 +133,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-20">
-          <div className="flex w-full md:w-8/12">
+        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-8 md:gap-20">
+          <div className="flex w-full md:w-8/12 order-2 md:order-none">
             <div className=" w-full mx-auto rounded-xl p-1">
               <div className="flex p-4 justify-center w-full rounded-xl -rotate-1 bg-gradient-to-r from-[#6776FF] via-[#87c9f8] to-[#ceeaff] h-auto">
                 <img
@@ -144,7 +144,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-full md:w-4/12 p-6 justify-center gap-5">
+          <div className="flex flex-col w-full md:w-4/12 p-6 justify-center gap-5 order-1 md:order-none">
             <div className="flex gap-4 items-center">
               <BookTemplate />
               <h3 className="text-2xl font-bold">Custom Pre-Built Templates</h3>
@@ -157,7 +157,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-20">
+        <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-8 md:gap-20">
           <div className="flex flex-col w-full md:w-4/12 p-6 justify-center gap-5">
             <div className="flex gap-4 items-center">
               <BookTemplate />
@@ -185,7 +185,7 @@ export default function Home() {
       <div className="w-full mt-20 px-4 md:px-24 py-6 md:py-10">
         <div className="flex flex-col items-center w-full h-auto md:gap-28 gap-10">
           <h2 className="text-3xl font-semibold">Tech Stack Used</h2>
-          <div className="flex flex-col md:flex-row gap-24 w-full items-center md:justify-center h-auto flex-wrap">
+          <div className="flex flex-col md:flex-row gap-12 md:gap-24 w-full items-center md:justify-center h-auto flex-wrap">
             <img
               src="/assets/nextjsIcon.svg"
               className="w-44 h-44 rounded-lg"
@@ -231,7 +231,7 @@ export default function Home() {
         <p className="text-xs text-gray-600">
           Built with NextJS and Appwrite ❤️
         </p>
-        <div className="flex gap-8">
+        <div className="flex flex-col sm:flex-row gap-8">
           <Link href="http://github.com/yatharth1706" target="_blank">
             <span className="flex gap-2 items-center cursor-pointer hover:scale-105">
               <Github className="w-5 h-5" /> My Github

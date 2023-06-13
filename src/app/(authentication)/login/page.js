@@ -59,7 +59,7 @@ function Login() {
       >
         {(formik) => (
           <form
-            className="text-sm bg-white shadow border border-zinc-200 rounded-lg flex flex-col gap-3 p-12 w-full"
+            className="text-sm bg-white shadow border border-zinc-200 rounded-lg flex flex-col gap-3 p-4 md:p-12 w-full"
             onSubmit={formik.handleSubmit}
           >
             <Link href="/">
