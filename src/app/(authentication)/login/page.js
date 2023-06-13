@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, useFormik } from "formik";
 import Link from "next/link";
 import * as Yup from "yup";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 import { usePathname, useRouter } from "next/navigation";
+import Loading from "@/src/components/Loading";
 
 function Login() {
+  const [isLogging, setIsLogging] = useState(false);
   const { loginWithGoogle, login } = useFormVibeContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -38,7 +40,14 @@ function Login() {
   });
 
   const formSubmit = async (values) => {
-    await login(values.email, values.password);
+    try {
+      setIsLogging(true);
+      await login(values.email, values.password);
+    } catch (err) {
+      console.error(error);
+    } finally {
+      setIsLogging(false);
+    }
   };
 
   return (
@@ -91,8 +100,13 @@ function Login() {
                 {formik.errors.password}
               </div>
             ) : null}
-            <button type="submit" className="btn-primary mt-4">
-              Login
+            <button
+              type="submit"
+              className="flex items-center justify-center btn-primary mt-4"
+              disabled={isLogging}
+            >
+              {isLogging && <Loading extraClasses="w-4 h-4" />}
+              {isLogging ? "Logging in" : "Login"}
             </button>
 
             <p className="text-center font-light text-gray-700 mt-1">

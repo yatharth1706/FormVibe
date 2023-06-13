@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, useFormik } from "formik";
 import Link from "next/link";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 import * as Yup from "yup";
 import { usePathname, useRouter } from "next/navigation";
+import Loading from "@/src/components/Loading";
 
 function Signup() {
+  const [isSigning, setIsSigning] = useState(false);
   const { signup } = useFormVibeContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -42,9 +44,16 @@ function Signup() {
       .required("Required"),
   });
 
-  const formSubmit = (values) => {
-    const { email, password, name } = values;
-    signup(name, email, password);
+  const formSubmit = async (values) => {
+    try {
+      setIsSigning(true);
+      const { email, password, name } = values;
+      await signup(name, email, password);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSigning(false);
+    }
   };
 
   return (
@@ -111,8 +120,13 @@ function Signup() {
                 {formik.errors.password}
               </div>
             ) : null}
-            <button type="submit" className="btn-primary mt-4">
-              Sign up
+            <button
+              type="submit"
+              className="btn-primary mt-4 flex justify-center items-center"
+              disabled={isSigning}
+            >
+              {isSigning && <Loading extraClasses="w-4 h-4" />}
+              {isSigning ? "Signing up" : "Sign up"}
             </button>
 
             <p className="text-center font-light text-gray-700 mt-1">

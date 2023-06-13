@@ -122,9 +122,8 @@ export default function FormvibeContextProvider({ children }) {
       if (typeof window !== undefined) {
         window.localStorage.setItem("FormVibeUser", "");
       }
-      throw new Error(err?.message ?? "Network error");
-
       router.push("/login");
+      throw new Error(err?.message ?? "Network error");
     } finally {
       setIsLoading(false);
     }

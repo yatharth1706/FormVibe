@@ -8,7 +8,7 @@ export default function SharePage({ params }) {
 
   const handleTwitterShare = () => {
     const tweetText = encodeURIComponent(
-      "Created form using FormVibe. \n\nHere&apos;s the link. Do checkout and fill the form.\n\n" +
+      "Created form using FormVibe. \n\nHere's the link. Do checkout and fill the form.\n\n" +
         process.env.NEXT_PUBLIC_APP_URL +
         "" +
         params?.id
@@ -21,7 +21,7 @@ export default function SharePage({ params }) {
 
   const handleFacebookShare = () => {
     const postText = encodeURIComponent(
-      "Created form using FormVibe. \n\nHere&apos;s the link. Do checkout and fill the form.\n\n" +
+      "Created form using FormVibe. \n\nHere's the link. Do checkout and fill the form.\n\n" +
         process.env.NEXT_PUBLIC_APP_URL +
         "" +
         params?.id
@@ -34,7 +34,7 @@ export default function SharePage({ params }) {
 
   const handleLinkedInShare = () => {
     const postText = encodeURIComponent(
-      "Created form using FormVibe. \n\nHere&apos;s the link. Do checkout and fill the form.\n\n" +
+      "Created form using FormVibe. \n\nHere's the link. Do checkout and fill the form.\n\n" +
         process.env.NEXT_PUBLIC_APP_URL +
         "" +
         params?.id

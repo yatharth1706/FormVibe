@@ -1,6 +1,6 @@
 import React from "react";
 
-function FormActionCard({ title, description, onClick }) {
+function FormActionCard({ title, description, onClick, isCreatingForm }) {
   return (
     <div
       className="flex flex-col justify-center items-center p-12 border border-gray-200 rounded-lg md:w-[390px] md:h-[260px] gap-4 shadow cursor-pointer hover:shadow-2xl bg-white"

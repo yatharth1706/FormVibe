@@ -10,22 +10,31 @@ import { useState } from "react";
 import { useFormVibeContext } from "../contexts/FormVibeContextProvider";
 import { PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Loading from "./Loading";
 
 export default function CreateFormDialog() {
   const [isTemplatesModalOpen, setIsTemplatesModalOpen] = useState(false);
   const { createForm } = useFormVibeContext();
+  const [isCreatingForm, setIsCreatingForm] = useState(false);
   const router = useRouter();
 
   const handleCreateForm = async () => {
-    let user =
-      (typeof window !== undefined &&
-        window.localStorage.getItem("FormVibeUser")) ??
-      "{}";
-    let userInfo = JSON.parse(user);
+    try {
+      setIsCreatingForm(true);
+      let user =
+        (typeof window !== undefined &&
+          window.localStorage.getItem("FormVibeUser")) ??
+        "{}";
+      let userInfo = JSON.parse(user);
 
-    const res = await createForm(userInfo?.$id);
-    console.log(res);
-    router.push("/forms/" + res?.form_id);
+      const res = await createForm(userInfo?.$id);
+      console.log(res);
+      router.push("/forms/" + res?.form_id);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsCreatingForm(false);
+    }
   };
 
   return (
@@ -55,6 +64,7 @@ export default function CreateFormDialog() {
             setIsTemplatesModalOpen={setIsTemplatesModalOpen}
           />
         </div>
+        <div className="flex justify-end">{isCreatingForm && <Loading />}</div>
       </DialogContent>
     </Dialog>
   );

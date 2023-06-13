@@ -13,7 +13,7 @@ function MyAccount() {
   const [profilePic, setProfilePic] = useState("");
   const { retrieveUser, storeFile, getFilePreview, updateUser } =
     useFormVibeContext();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -38,19 +38,26 @@ function MyAccount() {
   };
 
   const handleSave = async () => {
-    let id = "";
-    if (newProfilePic) {
-      const file = document.getElementById("profilePic").files[0];
-      id = await storeFile(file);
-      setProfilePicPreview("");
-    }
+    try {
+      setIsSaving(true);
+      let id = "";
+      if (newProfilePic) {
+        const file = document.getElementById("profilePic").files[0];
+        id = await storeFile(file);
+        setProfilePicPreview("");
+      }
 
-    await updateUser(userInfo?.$id, {
-      name,
-      email,
-      profile_pic: id ? id : userInfo?.profile_pic,
-    });
-    await fetchUser();
+      await updateUser(userInfo?.$id, {
+        name,
+        email,
+        profile_pic: id ? id : userInfo?.profile_pic,
+      });
+      await fetchUser();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const fetchUser = async () => {
@@ -125,8 +132,9 @@ function MyAccount() {
                 className="w-44 btn-primary"
                 type="button"
                 onClick={handleSave}
+                disabled={isSaving}
               >
-                {isLoading ? "Saving..." : "Save"}
+                {isSaving ? "Saving..." : "Save"}
               </button>
             </div>
           </div>

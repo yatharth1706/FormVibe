@@ -65,12 +65,12 @@ function Sidebar() {
         isActive={path === "/app/account"}
         link="/app/account"
       />
-      <NavLink
+      {/* <NavLink
         iconImg="helpIcon.svg"
         linkName="Help"
         isActive={path === "/app/help"}
         link="/app/help"
-      />
+      /> */}
     </div>
   );
 }

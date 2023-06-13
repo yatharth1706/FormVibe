@@ -2,10 +2,11 @@
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 import { AppWindow, Book } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import Loading from "./Loading";
 
 function FormTemplates() {
+  const [isCreatingForm, setIsCreatingForm] = useState(false);
   const { createForm } = useFormVibeContext();
   const router = useRouter();
 
@@ -96,25 +97,32 @@ function FormTemplates() {
   ];
 
   const createFormFromTemplate = async (templateType) => {
-    let user =
-      (typeof window !== undefined &&
-        window.localStorage.getItem("FormVibeUser")) ??
-      "{}";
-    let userInfo = JSON.parse(user);
-    let userId = userInfo?.$id;
+    try {
+      setIsCreatingForm(true);
+      let user =
+        (typeof window !== undefined &&
+          window.localStorage.getItem("FormVibeUser")) ??
+        "{}";
+      let userInfo = JSON.parse(user);
+      let userId = userInfo?.$id;
 
-    if (templateType === "job") {
-      const res = await createForm(
-        userId,
-        "Job Application Form",
-        jobAppFormEls
-      );
-      console.log(res);
-      router.push("/forms/" + res?.form_id);
-    } else {
-      const res = await createForm(userId, "Survey Form", surveyFormEls);
-      console.log(res);
-      router.push("/forms/" + res?.form_id);
+      if (templateType === "job") {
+        const res = await createForm(
+          userId,
+          "Job Application Form",
+          jobAppFormEls
+        );
+        console.log(res);
+        router.push("/forms/" + res?.form_id);
+      } else {
+        const res = await createForm(userId, "Survey Form", surveyFormEls);
+        console.log(res);
+        router.push("/forms/" + res?.form_id);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsCreatingForm(false);
     }
   };
 
@@ -137,6 +145,7 @@ function FormTemplates() {
       <span className="text-xs text-zinc-500">
         More templates to arrive soon
       </span>
+      <div className="flex justify-end">{isCreatingForm && <Loading />}</div>
     </div>
   );
 }
