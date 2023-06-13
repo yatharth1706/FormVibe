@@ -1,7 +1,61 @@
-## Form Vibe
+<p align="center">
+  <img src="https://github.com/yatharth1706/FormVibe/assets/32243289/c38d33db-fd32-44cb-86e4-ea9853367c1f" width = "60" height = "60" alt="Logo" />
+</p>
 
-Interactive form desginer tool. Alternative of typeform and formapp.so, with interactive user interface to design forms and share them with users
+## Form Vibe - Create Forms With Ease
+Interactive form desginer tool. Alternative of typeform and airtable, with interactive user interface to design forms and share them with users.
+Provides built in drag and drop feature in the form builder which users can use to build forms in easy way and customize accordingly.
 
-![Screenshot from 2023-06-11 22-09-29](https://github.com/yatharth1706/FormVibe/assets/32243289/a220ce55-c1ff-406b-b238-94ef7d9a4fa0)
+![OgImage](https://github.com/yatharth1706/FormVibe/assets/32243289/de9f26d1-5caa-43d9-ae25-b8d217f73d13)
+
+## Demo Video
+https://youtu.be/FRMfz-3pbi0
+
+## Features
+- Create Forms using Interactive Form Builder
+- Edit Form
+- Share form with the unique form slug
+- Share on social media platforms
+- Preview form
+- Choose templates to create form
+- Collect responses from the user
+- Manage your account
+
+## Roadmap
+- AI to create form automatically
+- Members Page for collaboration
+- Integrations page
+- Customizing form sharable link
+- Attaching custom domain for sharing forms
+
+## Tech Stack Used
+- NextJS
+- Appwrite
+- Shadcn UI Components
+- Lucide icons
+- React DND for drag and drop
+- Formik for forms
+- Tailwind CSS
+
+## Steps to run it locally
+1. Clone the repository
+```
+git clone https://github.com/yatharth1706/FormVibe.git
+cd FormVibe
+```
+
+2. Install all dependencies
+```
+npm install
+```
+
+3. Copy .env.example file to .env.local and replace all the values with your credentials
+4. Run the dev server
+```
+npm run dev
+```
+
+
+
 
 
