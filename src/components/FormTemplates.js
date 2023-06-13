@@ -6,7 +6,7 @@ import React from "react";
 import Loading from "./Loading";
 
 function FormTemplates() {
-  const { createForm, isLoading } = useFormVibeContext();
+  const { createForm } = useFormVibeContext();
   const router = useRouter();
 
   const jobAppFormEls = [

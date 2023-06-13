@@ -11,8 +11,9 @@ function MyAccount() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [profilePic, setProfilePic] = useState("");
-  const { retrieveUser, storeFile, getFilePreview, isLoading, updateUser } =
+  const { retrieveUser, storeFile, getFilePreview, updateUser } =
     useFormVibeContext();
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {

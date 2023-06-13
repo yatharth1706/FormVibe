@@ -39,6 +39,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     } finally {
       setIsLoading(false);
     }
@@ -57,6 +58,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -78,6 +80,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -100,6 +103,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     } finally {
       setIsLoading(false);
     }
@@ -118,6 +122,8 @@ export default function FormvibeContextProvider({ children }) {
       if (typeof window !== undefined) {
         window.localStorage.setItem("FormVibeUser", "");
       }
+      throw new Error(err?.message ?? "Network error");
+
       router.push("/login");
     } finally {
       setIsLoading(false);
@@ -169,6 +175,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -186,6 +193,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -204,6 +212,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -231,6 +240,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -252,6 +262,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -270,6 +281,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -290,6 +302,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -308,6 +321,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -321,6 +335,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -334,6 +349,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -352,6 +368,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -375,6 +392,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     }
   };
 
@@ -398,6 +416,7 @@ export default function FormvibeContextProvider({ children }) {
         autoClose: 4000,
         theme: "light",
       });
+      throw new Error(err?.message ?? "Network error");
     } finally {
       // setIsLoading(false);
     }

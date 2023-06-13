@@ -145,6 +145,21 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <div className="w-full mt-20 flex flex-col items-center gap-5 bg-slate-100 p-12">
+        <div className="font-extrabold text-2xl flex items-center gap-2">
+          <div>
+            <img width={44} height={44} src="/assets/Icon.png" alt="App Logo" />
+          </div>
+          <span className="bg-gradient-radial bg-gray-700  bg-clip-text text-transparent">
+            Form{" "}
+          </span>
+          <img src="/assets/Vibe.png" alt="Vibe text" className="w-16" />
+        </div>
+        <p className="text-xs text-gray-600">
+          Built with NextJS and Appwrite ❤️
+        </p>
+      </div>
     </main>
   );
 }
