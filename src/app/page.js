@@ -1,6 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { BookTemplate, Github, Grip, Linkedin, Twitter } from "lucide-react";
+import {
+  BookTemplate,
+  BookTemplateIcon,
+  Github,
+  Grip,
+  Linkedin,
+  Share,
+  Twitter,
+} from "lucide-react";
 import { LayoutList } from "lucide-react";
 
 export default function Home() {
@@ -146,13 +154,13 @@ export default function Home() {
           </div>
           <div className="flex flex-col w-full md:w-4/12 p-6 justify-center gap-5 order-1 md:order-none">
             <div className="flex gap-4 items-center">
-              <BookTemplate />
-              <h3 className="text-2xl font-bold">Custom Pre-Built Templates</h3>
+              <BookTemplateIcon />
+              <h3 className="text-2xl font-bold">Form Customizations</h3>
             </div>
             <p className="text-gray-800">
-              Customized templates to create forms and share with users. No need
-              to go to builder. User can directly choose pre built custom made
-              templates and create form in seconds
+              Provides full customization for the form including selecting form
+              banners or icons. Both are optional and if not provided dummy
+              background comes.
             </p>
           </div>
         </div>
@@ -160,13 +168,13 @@ export default function Home() {
         <div className="w-10/12 flex flex-col md:flex-row px-4 md:px-24 py-6 md:py-10 gap-8 md:gap-20">
           <div className="flex flex-col w-full md:w-4/12 p-6 justify-center gap-5">
             <div className="flex gap-4 items-center">
-              <BookTemplate />
-              <h3 className="text-2xl font-bold">Custom Pre-Built Templates</h3>
+              <Share />
+              <h3 className="text-2xl font-bold">Share forms with the users</h3>
             </div>
             <p className="text-gray-800">
-              Customized templates to create forms and share with users. No need
-              to go to builder. User can directly choose pre built custom made
-              templates and create form in seconds
+              It provides sharable link which we can share with users to get
+              their responses. It provides feature to share the form via
+              twitter, linkedin or facebook as well
             </p>
           </div>
           <div className="flex w-full md:w-8/12">
