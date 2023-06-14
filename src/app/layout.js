@@ -1,8 +1,8 @@
 import "./globals.css";
 import { Manrope } from "next/font/google";
 import FormVibeContextProvider from "@/src/contexts/FormVibeContextProvider";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ToastWrapper from "../components/ToastWrapper";
 const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata = {
@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
       >
         <FormVibeContextProvider>
           <main>{children}</main>
-          <ToastContainer />
+          <ToastWrapper />
         </FormVibeContextProvider>
       </body>
     </html>

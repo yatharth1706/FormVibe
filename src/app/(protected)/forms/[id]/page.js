@@ -66,6 +66,7 @@ function BuilderPage({ params }) {
       form_icon: formIcon ?? "",
     };
     await updateForm(payload, formId);
+    console.log(btnType);
     if (btnType === "save") {
       toast("Form updated successfully.", {
         position: "bottom-right",
