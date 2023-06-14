@@ -34,8 +34,6 @@ function FormElementsContainer() {
     { elementName: "Date", icon: "calenderIcon.svg" },
     { elementName: "Radio Buttons", icon: "radioIcon.svg" },
     { elementName: "Yes / No", icon: "decisionIcon.svg" },
-    { elementName: "Poll", icon: "pollIcon.svg" },
-    { elementName: "Opinion", icon: "opinionIcon.svg" },
   ]);
 
   const [filteredEl, setFilteredEl] = useState([
@@ -46,14 +44,12 @@ function FormElementsContainer() {
     { elementName: "Date", icon: "calenderIcon.svg" },
     { elementName: "Radio Buttons", icon: "radioIcon.svg" },
     { elementName: "Yes / No", icon: "decisionIcon.svg" },
-    { elementName: "Poll", icon: "pollIcon.svg" },
-    { elementName: "Opinion", icon: "opinionIcon.svg" },
   ]);
 
   const handleSearch = (val) => {
     if (val) {
       let filteredCol = formElementsCollection.filter((item) =>
-        item.elementName.includes(val)
+        item.elementName.toLocaleLowerCase().includes(val.toLocaleLowerCase())
       );
       setFilteredEl(filteredCol);
     } else {
