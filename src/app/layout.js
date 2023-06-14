@@ -24,9 +24,6 @@ export const metadata = {
     siteName: "FormVibe",
     images: "assets/OgImage.png",
   },
-  icons: {
-    icon: "assets/Icon.png",
-  },
 };
 
 export default function RootLayout({ children }) {
