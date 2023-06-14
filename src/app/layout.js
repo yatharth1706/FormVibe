@@ -3,7 +3,6 @@ import { Manrope } from "next/font/google";
 import FormVibeContextProvider from "@/src/contexts/FormVibeContextProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import FormVibeContextHOCWrapper from "../contexts/FormVibeContextHOCWrapper";
 const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata = {
@@ -26,10 +25,7 @@ export const metadata = {
     images: "assets/OgImage.png",
   },
   icons: {
-    icon: [
-      { url: "assets/Icon.png" },
-      new URL("assets/Icon.png", process.env.NEXT_PUBLIC_APP_URL),
-    ],
+    icon: "assets/Icon.png",
   },
 };
 
@@ -39,10 +35,10 @@ export default function RootLayout({ children }) {
       <body
         className={manrope.className + " text-gray-800 text-sm bg-[#fdfdfd]"}
       >
-        <FormVibeContextHOCWrapper>
+        <FormVibeContextProvider>
           <main>{children}</main>
           <ToastContainer />
-        </FormVibeContextHOCWrapper>
+        </FormVibeContextProvider>
       </body>
     </html>
   );
