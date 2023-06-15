@@ -70,9 +70,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold">Drag and Drop</h3>
             </div>
             <p className="text-gray-800">
-              Customized page for better responses collection in the interface.
-              Share the responses or do data analysis on that with our beautiful
-              data analyzer as well
+              Built in drag and drop functionality provided in the forms builder page to let users make form easy with just simple drag and drop
             </p>
           </div>
           <div className="flex w-full md:w-8/12">
