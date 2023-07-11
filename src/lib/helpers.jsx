@@ -73,7 +73,7 @@ export function renderFormElement(
             placeholder="Enter label name here"
             className="text-gray-700 text-lg font-semibold outline-none"
           />
-          <div className="h-44 w-full border border-zinc-200 rounded p-8 flex flex-col gap-3 justify-center items-center bg-sky-50">
+          <div className="relative h-44 w-full outline-dashed outline-gray-200 -outline-offset-4 rounded p-8 flex flex-col gap-3 justify-center items-center hover:bg-slate-50">
             <UploadIcon />
             <p>Select file to upload</p>
           </div>
@@ -215,7 +215,7 @@ export function renderFormElement(
                 type="text"
                 value={opt}
                 onChange={(e) => handleOptionChange(index, e.target.value)}
-                className="text-gray-700  font-semibold outline-none"
+                className="text-gray-700 outline-none"
               />
               <Trash2Icon
                 className="w-4 ml-3 cursor-pointer "

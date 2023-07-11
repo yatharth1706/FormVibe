@@ -52,7 +52,7 @@ export function renderFinalFormElements(
           <label className="text-gray-700 text-lg font-semibold outline-none">
             {(index + 1).toString() + ". " + label}
           </label>
-          <div className="relative h-44 w-full border border-zinc-200 rounded p-8 flex flex-col gap-3 justify-center items-center bg-slate-100 hover:bg-slate-200">
+          <div className="relative h-44 w-full outline-dashed outline-gray-200 -outline-offset-4 rounded p-8 flex flex-col gap-3 justify-center items-center hover:bg-slate-50">
             {fileName ? (
               <span>{fileName}</span>
             ) : (
@@ -171,7 +171,7 @@ export function renderFinalFormElements(
                 value={opt}
                 onChange={handleValueChange}
               />
-              <label className="text-gray-700 text-lg font-semibold outline-none">
+              <label className="text-gray-700 text-lg outline-none">
                 {opt}
               </label>
             </div>

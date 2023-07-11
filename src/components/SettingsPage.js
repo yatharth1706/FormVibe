@@ -16,12 +16,7 @@ export default function SettingsPage({
   return (
     <div className="flex flex-col gap-4 w-11/12 mx-auto p-8">
       <h2 className="font-semibold">Form Appearance</h2>
-      <div
-        className="flex flex-col gap-8 items-center w-full border border-zinc-200 rounded bg-white pb-10"
-        style={{
-          boxShadow: "2px 2px 15px rgba(32, 161, 255, 0.20)",
-        }}
-      >
+      <div className="flex flex-col gap-8 items-center w-full border border-zinc-200 rounded bg-white pb-10">
         <div className="flex text-gray-600 gap-2 justify-center items-center h-56 w-full bg-slate-200 hover:bg-slate-300 cursor-pointer border border-zinc-200 border-dashed relative">
           {formBannerPreview && (
             <img
