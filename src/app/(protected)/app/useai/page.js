@@ -5,12 +5,80 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
+import { Progress } from "@/src/components/ui/Progress";
+
+let customPrompt = `Create a form for <PROMPT> form, and suggest relevant form elements for that. Provide the form elements in the array format as shown below:
+
+---BEGIN_ARRAY---
+[
+  {
+    "id": 1,
+    "name": "Text Field",
+    "label": "Full Name",
+    "value": "",
+    "isRequired": true
+  },
+  {
+    "id": 2,
+    "name": "Email",
+    "label": "Email Address",
+    "value": "",
+    "isRequired": true
+  },
+  {
+    "id": 3,
+    "name": "Phone Number",
+    "label": "Phone Number",
+    "value": "",
+    "isRequired": true
+  },
+  {
+    "id": 4,
+    "name": "Text Area",
+    "label": "Address",
+    "value": "",
+    "isRequired": true
+  },
+  {
+    "id": 5,
+    "name": "Radio Buttons",
+    "label": "Education",
+    "value": "",
+    "optionsList": ["High School", "Bachelor's Degree", "Master's Degree", "PhD"],
+    "isRequired": true
+  },
+  {
+    "id": 6,
+    "name": "Text Area",
+    "label": "Work Experience",
+    "value": "",
+    "isRequired": true
+  },
+  {
+    "id": 7,
+    "name": "Yes / No",
+    "label": "Are you willing to relocate?",
+    "value": "",
+    "isRequired": true
+  },
+  {
+    "id": 8,
+    "name": "File Upload",
+    "label": "Resume",
+    "value": "",
+    "isRequired": true
+  }
+]
+---END_ARRAY---
+`;
 
 function UseAIPage() {
   const [openAIKey, setOpenAIKey] = useState();
   const [prompt, setPrompt] = useState("");
   const [isGeneratingForm, setIsGeneratingForm] = useState(false);
   const { createForm } = useFormVibeContext();
+  const [progressMessage, setProgressMessage] = useState("");
+  const [progPercent, setProgPercent] = useState(20);
   const router = useRouter();
 
   useEffect(() => {
@@ -36,6 +104,9 @@ function UseAIPage() {
         apiKey: openAIKey,
       });
 
+      setProgressMessage(30);
+      setProgressMessage("Asking openAI");
+
       const openai = new OpenAIApi(configuration);
 
       const chat_completion = await openai.createChatCompletion({
@@ -43,92 +114,43 @@ function UseAIPage() {
         messages: [
           {
             role: "user",
-            content:
-              `i have this array with various form elements and thier label names and other properties of element. const jobAppFormEls = [
-          {
-            id: 1686060127832,
-            name: "Text Field",
-            label: "Full Name",
-            value: "",
-            isRequired: true,
-          },
-          {
-            id: 1686060132118,
-            name: "Phone Number",
-            label: "Phone no",
-            value: "",
-            isRequired: true,
-          },
-          {
-            id: 1686060136527,
-            name: "Text Area",
-            label: "Address",
-            value: "",
-            isRequired: true,
-          },
-          {
-            id: 1686060146790,
-            name: "Radio Buttons",
-            label: "Education",
-            value: "",
-            optionsList: ["Btech", "MBA", "BBA", "MCA"],
-            isRequired: true,
-          },
-          {
-            id: 1686060152189,
-            name: "Text Area",
-            label: "Why are you a good fit for the role ?",
-            value: "",
-            isRequired: true,
-          },
-          {
-            id: 1686060162294,
-            name: "Yes / No",
-            label: "Do you have 2+ years of experience ?",
-            value: "",
-            isRequired: true,
-          },
-          {
-            id: 1686060172470,
-            name: "Yes / No",
-            label: "Do you have experience with Svelte ?",
-            value: "",
-            isRequired: true,
-          },
-          {
-            id: 1686060180662,
-            name: "File Upload",
-            label: "Resume",
-            value: "",
-            isRequired: true,
-          },
-        ]; Create form for following scenario and provide me only array in json stringify format without variable. Scenario: ` +
-              " " +
-              prompt,
+            content: customPrompt.replace("<PROMPT>", prompt),
           },
         ],
       });
 
-      console.log(
-        chat_completion.json().then(async (m) => {
-          if (m?.error) {
-            console.log(m?.error?.message);
-            toast(m?.error?.message, {
-              position: "bottom-right",
-              autoClose: 2000,
-              theme: "light",
-            });
-          } else {
-            let formEls = JSON.parse(m);
+      chat_completion.json().then(async (m) => {
+        if (m?.error) {
+          console.log(m?.error?.message);
+          toast(m?.error?.message, {
+            position: "bottom-right",
+            autoClose: 2000,
+            theme: "light",
+          });
+        } else {
+          try {
+            let extractedArr = extractArrayFromResponse(m);
+            let formEls = extractedArr;
+            console.log(formEls);
+            setProgressMessage("Creating form");
             await createFormFromTemplate(formEls);
             toast("Created form successfully using provided prompt", {
               position: "bottom-right",
               autoClose: 2000,
               theme: "light",
             });
+          } catch (err) {
+            toast(err, {
+              position: "bottom-right",
+              autoClose: 2000,
+              theme: "light",
+            });
+          } finally {
+            setProgressMessage("");
+            setIsGeneratingForm(true);
           }
-        })
-      );
+        }
+      });
     } catch (err) {
       toast(err, {
         position: "bottom-right",
@@ -136,6 +158,7 @@ function UseAIPage() {
         theme: "light",
       });
     } finally {
+      setProgressMessage("");
       setIsGeneratingForm(true);
     }
   };
@@ -159,24 +182,25 @@ function UseAIPage() {
     }
   };
 
-  function extractConsultationFormArray(responseContent) {
-    console.log(responseContent);
-    // Find the starting index of the array by locating the first occurrence of '[\n'
-    const startIndex = responseContent.indexOf("[\n");
-    console.log(startIndex);
+  function extractArrayFromResponse(response) {
+    let finaloutput = response?.choices[0]["message"]["content"];
+    response = finaloutput;
+    console.log(response);
+    const beginDelimiter = "---BEGIN_ARRAY---";
+    const endDelimiter = "---END_ARRAY---";
+    const beginIndex = response.indexOf(beginDelimiter) + beginDelimiter.length;
+    const endIndex = response.indexOf(endDelimiter);
 
-    // Find the ending index of the array by locating the last occurrence of '\n];'
-    const endIndex = responseContent.lastIndexOf("\n];") + 3;
-    console.log(endIndex);
+    if (beginIndex < 0 || endIndex < 0 || endIndex <= beginIndex) {
+      throw new Error("Invalid response format: Array delimiters not found.");
+    }
 
-    // Extract the array portion from the response content
-    const arrayString = responseContent.slice(startIndex, endIndex);
-
-    console.log(arrayString);
-    // Parse the array string into an actual JavaScript array
-    const consultationFormEls = JSON.parse(arrayString);
-
-    return consultationFormEls;
+    const arrayString = response.substring(beginIndex, endIndex).trim();
+    try {
+      return JSON.parse(arrayString);
+    } catch (error) {
+      throw new Error("Failed to parse the array in the response.");
+    }
   }
 
   return (
@@ -233,6 +257,12 @@ function UseAIPage() {
       >
         {isGeneratingForm ? "Creating..." : "Create Form"}
       </button>
+      {isGeneratingForm && (
+        <div>
+          <Progress value={progPercent} className=" h-1" />
+          <small className="flex mt-1">{progressMessage}...</small>
+        </div>
+      )}
     </div>
   );
 }
