@@ -1,9 +1,10 @@
 "use client";
+import { BrainCircuit } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
-function NavLink({ iconImg, linkName, classDesc, isActive, link }) {
+function NavLink({ iconImg, linkName, classDesc, isActive, link, customIcon }) {
   return (
     <Link href={link}>
       <div
@@ -16,11 +17,15 @@ function NavLink({ iconImg, linkName, classDesc, isActive, link }) {
         title={linkName}
       >
         <div className="w-8">
-          <img
-            src={"/assets/icons/" + iconImg}
-            className={classDesc}
-            alt="Form Icon"
-          />
+          {customIcon ? (
+            <BrainCircuit className="text-gray-600" />
+          ) : (
+            <img
+              src={"/assets/icons/" + iconImg}
+              className={classDesc}
+              alt="Form Icon"
+            />
+          )}
         </div>
         <span className="hidden md:block">{linkName}</span>
       </div>
@@ -44,6 +49,13 @@ function Sidebar() {
         linkName="Templates"
         isActive={path === "/app/templates"}
         link="/app/templates"
+      />
+      <NavLink
+        customIcon="brainIcon"
+        iconImg="templatesIcon.svg"
+        linkName="Use AI"
+        isActive={path === "/app/useai"}
+        link="/app/useai"
       />
       {/* <NavLink
         iconImg="membersIcon.svg"
