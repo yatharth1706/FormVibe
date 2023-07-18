@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { renderFormElement } from "../lib/helpers";
+import { RenderFormElement, renderFormElement } from "../lib/helpers";
 import FormBuilderSidebar from "./FormBuilderSidebar";
 import { Switch } from "./ui/switch";
 import { useDrop } from "react-dnd";
@@ -42,11 +42,11 @@ export default function MainFormBuilder({
   };
 
   const handleOptionChange = (optIndex, value, index) => {
-    setFormElements((prevFormElements) => {
-      const updatedFormElements = [...prevFormElements];
-      updatedFormElements[index]["optionsList"][optIndex] = value;
-      return updatedFormElements;
-    });
+    let tempFormElements = [...formElements];
+    let options = [...tempFormElements[index]["optionsList"]];
+    options[optIndex] = value;
+    tempFormElements[index]["optionsList"] = [...options];
+    setFormElements([...tempFormElements]);
     setInitialRender(false);
   };
 
@@ -113,22 +113,28 @@ export default function MainFormBuilder({
           }
           ref={drop}
         >
-          {formElements.map((el, index) =>
-            renderFormElement(
-              index,
-              el.name,
-              el.label,
-              (event) => handleFormElementLabelChange(index, event),
-              true,
-              (e) => handleDeleteFormElement(e, index),
-              el?.optionsList ?? [],
-              (optIndex) => handleDeleteOptions(optIndex, index),
-              () => handleAddOptions(index),
-              (optIndex, value) => handleOptionChange(optIndex, value, index),
-              () => handleActiveFormElement(index),
-              currActiveFormElement
-            )
-          )}
+          {formElements.map((el, index) => (
+            <RenderFormElement
+              index={index}
+              name={el.name}
+              label={el.label}
+              onLabelChange={(event) =>
+                handleFormElementLabelChange(index, event)
+              }
+              disabled={true}
+              handleDelete={(e) => handleDeleteFormElement(e, index)}
+              optionsList={el?.optionsList}
+              handleDeleteRadioOption={(optIndex) =>
+                handleDeleteOptions(optIndex, index)
+              }
+              handleRadioOptions={() => handleAddOptions(index)}
+              handleOptionChange={(optIndex, value) =>
+                handleOptionChange(optIndex, value, index)
+              }
+              handleActiveFormElement={() => handleActiveFormElement(index)}
+              currActiveFormElement={currActiveFormElement}
+            />
+          ))}
           {!formElements.length > 0 && (
             <div className="rounded p-8 h-96 flex gap-3 justify-center items-center bg-white  w-full">
               <img

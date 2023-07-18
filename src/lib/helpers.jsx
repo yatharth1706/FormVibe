@@ -2,7 +2,7 @@ import { Trash2Icon, UploadIcon, Check, X } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css"; // Import the default CSS styles
 
-export function renderFormElement(
+export function RenderFormElement({
   index,
   name,
   label,
@@ -14,8 +14,8 @@ export function renderFormElement(
   handleRadioOptions,
   handleOptionChange,
   handleActiveFormElement,
-  currActiveFormEl
-) {
+  currActiveFormEl,
+}) {
   const isActive = index === currActiveFormEl;
   console.log(isActive, name);
   switch (name) {
@@ -204,22 +204,22 @@ export function renderFormElement(
             onChange={onLabelChange}
             className="text-gray-700 text-lg  font-semibold outline-none"
           />
-          {(optionsList ?? []).map((opt, index) => (
+          {(optionsList ?? []).map((opt, optIndex) => (
             <div
               className="flex gap-3 items-center"
-              key={(opt ?? "") + index.toString()}
+              key={(opt ?? "") + optIndex.toString()}
             >
               <input type="radio" />
               <input
                 placeholder="Enter label name here"
                 type="text"
                 value={opt}
-                onChange={(e) => handleOptionChange(index, e.target.value)}
+                onChange={(e) => handleOptionChange(optIndex, e.target.value)}
                 className="text-gray-700 outline-none"
               />
               <Trash2Icon
                 className="w-4 ml-3 cursor-pointer "
-                onClick={() => handleDeleteRadioOption(index)}
+                onClick={() => handleDeleteRadioOption(optIndex)}
               />
             </div>
           ))}
@@ -271,6 +271,6 @@ export function renderFormElement(
         </div>
       );
     default:
-      return <div className="flex flex-col gap-3">Work in progress</div>;
+      return <></>;
   }
 }
