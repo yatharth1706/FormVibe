@@ -115,6 +115,7 @@ export default function MainFormBuilder({
         >
           {formElements.map((el, index) => (
             <RenderFormElement
+              key={index + el.name + "$"}
               index={index}
               name={el.name}
               label={el.label}
@@ -152,7 +153,11 @@ export default function MainFormBuilder({
       <div className="w-3/12 p-8 flex flex-col gap-2">
         <div className="flex flex-col gap-3">
           <h1 className="font-medium">Settings</h1>
-          <img src="/assets/UnderLine.png" className="w-28" />
+          <img
+            src="/assets/UnderLine.png"
+            className="w-28"
+            alt="Underline png image"
+          />
         </div>
 
         <div>
