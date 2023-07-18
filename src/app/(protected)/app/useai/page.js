@@ -7,9 +7,7 @@ import { useRouter } from "next/navigation";
 import { useFormVibeContext } from "@/src/contexts/FormVibeContextProvider";
 import { Progress } from "@/src/components/ui/Progress";
 
-let customPrompt = `Create a form for <PROMPT> form, and suggest relevant form elements for that. Provide the form elements in the array format as shown below:
-
----BEGIN_ARRAY---
+let customPrompt = `Use below array containing set of form elements. Understand it and give me another array similar to this but with different form elements according to the scenario I want.
 [
   {
     "id": 1,
@@ -68,8 +66,7 @@ let customPrompt = `Create a form for <PROMPT> form, and suggest relevant form e
     "value": "",
     "isRequired": true
   }
-]
----END_ARRAY---
+] I want to create form for <PROMPT>. Provide me array between delimeters $ArrayBegin$ and $ArrayEnd$
 `;
 
 function UseAIPage() {
@@ -186,8 +183,8 @@ function UseAIPage() {
     let finaloutput = response?.choices[0]["message"]["content"];
     response = finaloutput;
     console.log(response);
-    const beginDelimiter = "---BEGIN_ARRAY---";
-    const endDelimiter = "---END_ARRAY---";
+    const beginDelimiter = "$ArrayBegin$";
+    const endDelimiter = "$ArrayEnd$";
     const beginIndex = response.indexOf(beginDelimiter) + beginDelimiter.length;
     const endIndex = response.indexOf(endDelimiter);
 

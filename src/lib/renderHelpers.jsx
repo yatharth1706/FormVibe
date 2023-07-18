@@ -226,6 +226,6 @@ export function renderFinalFormElements(
         </div>
       );
     default:
-      return <div className="flex flex-col gap-3">Work in progress</div>;
+      return <></>;
   }
 }
