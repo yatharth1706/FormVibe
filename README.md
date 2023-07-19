@@ -16,9 +16,9 @@ https://youtu.be/FRMfz-3pbi0
 - Choose templates to create form
 - Collect responses from the user
 - Manage your account
+- Use AI to create forms automatically
 
 ## Roadmap
-- AI to create form automatically
 - Members Page for collaboration
 - Integrations page
 - Customizing form sharable link
