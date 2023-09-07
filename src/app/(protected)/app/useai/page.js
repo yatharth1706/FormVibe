@@ -97,6 +97,14 @@ function UseAIPage() {
   const handlePrompts = async () => {
     try {
       setIsGeneratingForm(true);
+      if (!window.localStorage.getItem("OpenAIKeyFormVibe")) {
+        toast("Add open ai key first", {
+          position: "bottom-right",
+          autoClose: 2000,
+          theme: "light",
+        });
+        return;
+      }
       const configuration = new Configuration({
         apiKey: openAIKey,
       });
@@ -156,7 +164,7 @@ function UseAIPage() {
       });
     } finally {
       setProgressMessage("");
-      setIsGeneratingForm(true);
+      setIsGeneratingForm(false);
     }
   };
 
