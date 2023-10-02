@@ -46,8 +46,14 @@ npm install
 ```
 
 3. Copy .env.example file to .env.local and replace all the values with your credentials
-4. Three collections are also required in appwrite (Forms, users, Responses) and one bucket in storage. These steps are not automated yet. Will analyse it little more how i can automate these
-5. Run the dev server
+4. Create a project in appwrite console and add a web platform. Create one api key and give full database and storage access to that api key.
+5. Store that api key and project id in .env file
+6. Run the following script in your terminal. It will setup all required appwrite collections, indexes, attributes and bucket etc.
+```
+node scripts/initialSetup.js
+```
+7. Store all the required env variables after running above script
+8. Run the dev server
 ```
 npm run dev
 ```

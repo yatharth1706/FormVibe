@@ -14,7 +14,7 @@ export default function FormvibeContextProvider({ children }) {
 
   const client = new Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject(process.env.NEXT_PUBLIC_PROJECT_ID);
+    .setProject(process.env.PROJECT_ID);
 
   const account = new Account(client);
   const databases = new Databases(client);
