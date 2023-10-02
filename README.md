@@ -46,10 +46,13 @@ npm install
 ```
 
 3. Copy .env.example file to .env.local and replace all the values with your credentials
-4. Run the dev server
+4. Three collections are also required in appwrite (Forms, users, Responses) and one bucket in storage. These steps are not automated yet. Will analyse it little more how i can automate these
+5. Run the dev server
 ```
 npm run dev
 ```
+
+
 
 
 
